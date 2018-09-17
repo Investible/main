@@ -20,31 +20,56 @@
 
 
 This feature list is expected to require these database tables:
-[ ] Users
-[ ] Id
-[ ] Username
-[ ] Password
-[ ] Email
+
+[ ] Users:
+
+Id
+
+Username
+
+Password
+
+Email
+
 [ ] Comments
-[ ] Id
-[ ] Body
-[ ] Company Id
-[ ] User Id
+
+Id
+
+Body
+
+Company Id
+
+User Id
+
 [ ] Companies
-[ ] Id
-[ ] Name
-[ ] Ticker
-[ ] Net Income
-[ ] Earnings per Share
-[ ] Total Assets
-[ ] Total Liabilities
-[ ] Net Sales
+
+Id
+
+Name
+
+Ticker
+
+Net Income
+
+Earnings per Share
+
+Total Assets
+
+Total Liabilities
+
+Net Sales
 
 This feature list is expected to require these site views:
 
 [ ] Home Page / User Comment Index
+
 [ ] Register User Page
+
 [ ] Login Page
+
 [ ] Profile / Edit Profile Page
+
 [ ] List of Companies Page
+
 [ ] Individual Company Detail Page
+
