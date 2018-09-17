@@ -37,7 +37,7 @@ public class Company {
     @Column
     private Double yearLow;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
     private List<Comment> comments;
 
 }

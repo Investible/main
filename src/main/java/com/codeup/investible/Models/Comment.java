@@ -17,11 +17,11 @@ public class Comment {
     private Date timeStamp;
 
     @ManyToOne
+    @JoinColumn(name="company_id")
     private Company company;
 
     @ManyToOne
+    @JoinColumn(name="user_id")
     private User user;
-
-//    todo Connect to users and companies
 
 }
