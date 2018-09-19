@@ -1,5 +1,5 @@
 body {
-    padding-top: 90px;
+    padding-top: 80px;
 }
 .panel-login {
     border-color: #ccc;
@@ -78,6 +78,17 @@ body {
 .forgot-password:focus {
     text-decoration: underline;
     color: #666;
+}
+
+.register-account {
+    text-decoration: underline;
+    color: #59B2E0;
+}
+
+.register-account:hover,
+.register-accountLfocus {
+    text-decoration: underline;
+    color: #00415d;
 }
 
 .btn-register {
