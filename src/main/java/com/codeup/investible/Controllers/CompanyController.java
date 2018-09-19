@@ -1,10 +1,19 @@
 package com.codeup.investible.Controllers;
 
+<<<<<<< HEAD:src/main/java/com/codeup/investible/Controllers/CompanyController.java
 import com.codeup.investible.Repository.CompanyRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+=======
+import com.codeup.investible.Models.Company;
+
+import com.codeup.investible.services.CompanyService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+>>>>>>> afa74ccb0215f5ff304ae63a3ada0f44b8c00b4b:src/main/java/com/codeup/investible/controllers/CompanyController.java
 
 @Controller
 public class CompanyController {
@@ -14,25 +23,21 @@ public class CompanyController {
         this.companyRepo = companyRepo;
     }
 
-    @GetMapping("/company")
-    public String companyIndex(Model model){
+    private final CompanyService companySvc;
 
-
-//        List<Company> companies = (We need a method for finding a list of companies)
-//        model.addAttribute("companies", companies);
-
-        return "company/index";
+    public CompanyController(CompanyService companySvc) {this.companySvc = companySvc;
     }
 
-
-
-    @GetMapping("/company/{id}") //Might be better to request by name/ticker
-    public String companyShowPage(@PathVariable long id, Model model){
-
-//        Company company = (We need a way of searching for a company by id or name)
-//        Model.addAttribute("company", company)
-
-        return "company/view";
+    @GetMapping("/companies")
+    public String index(Model viewModel) {
+        viewModel.addAttribute("posts", companySvc.findAll());
+        return "companies/index";
     }
 
+    @GetMapping("/companies/{id}")
+    public String show(@PathVariable long id, Model viewModel) {
+        viewModel.addAttribute("company", companySvc.findOne(id));
+        return "companies/show";
+    }
 }
+
