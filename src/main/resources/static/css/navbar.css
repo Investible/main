@@ -1,0 +1,37 @@
+.navbar{
+    height: 5px;
+    background-color: transparent;
+}
+
+.navbar-brand{
+    color: #00415d;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.navbar .navbar-nav{
+    margin: auto;
+}
+
+.navbar .nav-item a{
+    color: black;
+}
+.navbar .dropdown-menu{
+    background-color: white;
+}
+.dropdown-item:hover{
+   color: #1CB94E;
+}
+
+.navbar form button{
+    background-color: cornflowerblue;
+    color: #00415d;
+    border:0;
+}
+
+.navbar form button{
+    background-color: black;
+    color: #00415d;
+    border:0;
+}
+
