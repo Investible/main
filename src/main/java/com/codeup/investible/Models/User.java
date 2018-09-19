@@ -12,19 +12,19 @@ public class User implements Serializable {
     @Id @GeneratedValue
     private long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String username;
 
-    @Column
+    @Column(nullable = false)
     private String firstName;
 
-    @Column
+    @Column(nullable = false)
     private String lastName;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
