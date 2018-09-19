@@ -26,11 +26,20 @@ public class AuthenticationController {
         return "user/login";
     }
 
-    @PostMapping("/sign-up")
+    @GetMapping("/register")
+    public String showRegisterForm(Model model) {
+        model.addAttribute("user", new User());
+        return "user/register";
+    }
+
+    @PostMapping("/register")
     public String saveUser(@ModelAttribute User user){
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
-        users.save(user);
-        return "redirect:/login";
+        if(users.findByUsername(user.getUsername()) == null && users.findByEmail(user.getEmail()) == null){
+            users.save(user);
+            return "redirect:/login";
+        }
+        return "redirect:/login?error";
     }
 }
