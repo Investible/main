@@ -19,7 +19,7 @@ public class RestClient
 
         try
         {
-            URIBuilder builder = new URIBuilder("https://services.last10k.com/v1/company/aapl/operations");
+            URIBuilder builder = new URIBuilder("https://services.last10k.com/v1/company/aapl/operations?formType=10-K&filingOrder=0&FilingDate");
 
             builder.setParameter("formType", "10-K");
             builder.setParameter("filingOrder", "0");
@@ -28,9 +28,8 @@ public class RestClient
             HttpGet request = new HttpGet(uri);
             request.setHeader("Ocp-Apim-Subscription-Key", "72eec0339d724c9bb456bd5b3ae180bc");
 
-
-            // Request body
-//            StringEntity reqEntity = new StringEntity("{body}");
+            //Request body
+//            StringEntity reqEntity = new StringEntity("{Data}");
 //            request.setEntity(reqEntity);
 
             HttpResponse response = httpclient.execute(request);
@@ -39,6 +38,7 @@ public class RestClient
             if (statementOfOperations != null)
             {
                 System.out.println(EntityUtils.toString(statementOfOperations));
+                System.out.println(builder);
             }
         }
         catch (Exception e)
