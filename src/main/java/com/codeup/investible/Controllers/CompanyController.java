@@ -1,15 +1,18 @@
-package com.codeup.investible.controllers;
+package com.codeup.investible.Controllers;
 
-import com.codeup.investible.Models.Company;
+import com.codeup.investible.Repository.CompanyRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
-
 @Controller
 public class CompanyController {
+    private final CompanyRepository companyRepo;
+
+    public CompanyController(CompanyRepository companyRepo){
+        this.companyRepo = companyRepo;
+    }
 
     @GetMapping("/company")
     public String companyIndex(Model model){

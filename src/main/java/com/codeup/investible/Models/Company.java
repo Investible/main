@@ -1,5 +1,7 @@
 package com.codeup.investible.Models;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -16,27 +18,26 @@ public class Company {
     @Column
     private String ticker;
 
+    @Column
+    private double netIncome;
 
     @Column
-    private Double netIncome;
+    private double eps;
 
     @Column
-    private Double eps;
+    private double totalAssets;
 
     @Column
-    private Double totalAssets;
+    private double totalLiabilities;
 
     @Column
-    private Double totalLiabilities;
+    private double sales;
 
-    @Column
-    private Double sales;
+//    @Column
+//    private double yearHigh;
 
-    @Column
-    private Double yearHigh;
-
-    @Column
-    private Double yearLow;
+//    @Column
+//    private double yearLow;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
     private List<Comment> comments;
@@ -45,7 +46,7 @@ public class Company {
 
     }
 
-    public Company(String name, String ticker, Double netIncome, Double eps, Double totalAssets, Double totalLiabilities, Double sales, Double yearHigh, Double yearLow, List<Comment> comments) {
+    public Company(String name, String ticker, double netIncome, double eps, double totalAssets, double totalLiabilities, double sales, List<Comment> comments) {
         this.name = name;
         this.ticker = ticker;
         this.netIncome = netIncome;
@@ -53,8 +54,6 @@ public class Company {
         this.totalAssets = totalAssets;
         this.totalLiabilities = totalLiabilities;
         this.sales = sales;
-        this.yearHigh = yearHigh;
-        this.yearLow = yearLow;
         this.comments = comments;
     }
 
@@ -82,61 +81,61 @@ public class Company {
         this.ticker = ticker;
     }
 
-    public Double getNetIncome() {
+    public double getNetIncome() {
         return netIncome;
     }
 
-    public void setNetIncome(Double netIncome) {
+    public void setNetIncome(double netIncome) {
         this.netIncome = netIncome;
     }
 
-    public Double getEps() {
+    public double getEps() {
         return eps;
     }
 
-    public void setEps(Double eps) {
+    public void setEps(double eps) {
         this.eps = eps;
     }
 
-    public Double getTotalAssets() {
+    public double getTotalAssets() {
         return totalAssets;
     }
 
-    public void setTotalAssets(Double totalAssets) {
+    public void setTotalAssets(double totalAssets) {
         this.totalAssets = totalAssets;
     }
 
-    public Double getTotalLiabilities() {
+    public double getTotalLiabilities() {
         return totalLiabilities;
     }
 
-    public void setTotalLiabilities(Double totalLiabilities) {
+    public void setTotalLiabilities(double totalLiabilities) {
         this.totalLiabilities = totalLiabilities;
     }
 
-    public Double getSales() {
+    public double getSales() {
         return sales;
     }
 
-    public void setSales(Double sales) {
+    public void setSales(double sales) {
         this.sales = sales;
     }
 
-    public Double getYearHigh() {
-        return yearHigh;
-    }
-
-    public void setYearHigh(Double yearHigh) {
-        this.yearHigh = yearHigh;
-    }
-
-    public Double getYearLow() {
-        return yearLow;
-    }
-
-    public void setYearLow(Double yearLow) {
-        this.yearLow = yearLow;
-    }
+//    public double getYearHigh() {
+//        return yearHigh;
+//    }
+//
+//    public void setYearHigh(double yearHigh) {
+//        this.yearHigh = yearHigh;
+//    }
+//
+//    public double getYearLow() {
+//        return yearLow;
+//    }
+//
+//    public void setYearLow(double yearLow) {
+//        this.yearLow = yearLow;
+//    }
 
     public List<Comment> getComments() {
         return comments;
@@ -145,6 +144,4 @@ public class Company {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
-
-
 }

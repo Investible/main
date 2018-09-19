@@ -1,4 +1,4 @@
-package com.codeup.investible.controllers;
+package com.codeup.investible.Controllers;
 
 import com.codeup.investible.Models.User;
 import com.codeup.investible.Repository.UserRepository;
