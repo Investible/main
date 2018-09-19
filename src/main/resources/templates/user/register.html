@@ -27,46 +27,44 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <form id="register-form" th:action="@{/register}" th:object="${user}" method="post" role="form" style="display: block;">
-                                <div class="alert alert-danger" role="alert" th:if="${param.error}" tabindex="1">
-                                    Invalid email or password.
+                                <div class="alert alert-danger" role="alert" th:if="${param.username}" tabindex="1">
+                                    The username has already been taken.
                                 </div>
-                                <div th:if="${param.logout}" class="alert alert-success" role="alert">
-                                    You have been logged out.
+
+                                <div class="alert alert-danger" role="alert" th:if="${param.email}" tabindex="1">
+                                    The email has already been used.
+                                </div>
+
+                                <div class="alert alert-danger" role="alert" th:if="${param.mismatch}" tabindex="1">
+                                    Password Must be Matching.
+                                </div>
+
+                                <div class="alert alert-danger" role="alert" th:if="${param.char}" tabindex="1">
+                                    Please only enter letters and numbers.
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" th:field="*{username}" id="username" tabindex="5" class="form-control" placeholder="Username"/>
+                                    <input type="text" th:field="*{username}" id="username" tabindex="5" class="form-control" placeholder="Username" required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" th:field="*{firstName}" id="firstName" tabindex="5" class="form-control" placeholder="First Name" />
+                                    <input type="text" th:field="*{firstName}" id="firstName" tabindex="5" class="form-control" placeholder="First Name" required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" th:field="*{lastName}" id="lastName" tabindex="5" class="form-control" placeholder="Last Name" />
+                                    <input type="text" th:field="*{lastName}" id="lastName" tabindex="5" class="form-control" placeholder="Last Name" required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" th:field="*{email}" id="email" tabindex="5" class="form-control" placeholder="Email Address" value=""/>
+                                    <input type="email" th:field="*{email}" id="email" tabindex="5" class="form-control" placeholder="Email Address" required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" th:field="*{password}" id="password" tabindex="5" class="form-control" placeholder="Password" />
+                                    <input type="password" name="password" th:field="*{password}" id="password" tabindex="5" class="form-control" placeholder="Password" required="required" />
                                 </div>
-                                <!--<div class="form-group">-->
-                                <!--<input type="password" th:field="*{confirmPassword}" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password" />-->
-                                <!--</div>-->
+                                <div class="form-group">
+                                <input type="password" name="confirmPassword" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password" required="required" />
+                                </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
                                             <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--<div class="form-group text-center">-->
-                                <!--<input type="checkbox" tabindex="3" class="" name="remember" id="remember">-->
-                                <!--<label for="remember"> Remember Me</label>-->
-                                <!--</div>-->
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-sm-offset-3">
-                                            <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In" />
                                         </div>
                                     </div>
                                 </div>

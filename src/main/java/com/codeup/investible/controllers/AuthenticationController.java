@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AuthenticationController {
@@ -34,13 +35,26 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public String saveUser(@ModelAttribute User user){
+    public String saveUser(@ModelAttribute User user, @RequestParam(name ="confirmPassword") String confirmPassword){
+        if(users.findByUsername(user.getUsername()) != null){
+            return "redirect:/register?username";
+        }
+        if(users.findByEmail(user.getEmail()) != null){
+            return "redirect:/register?email";
+        }
+        if(     !user.getUsername().matches("[a-zA-Z0-9]+") ||
+                !user.getPassword().matches("[a-zA-Z0-9]+") ||
+                !user.getFirstName().matches("[a-zA-Z0-9]+") ||
+                !user.getLastName().matches("[a-zA-Z0-9]+")
+                ){
+            return "redirect:/register?char";
+        }
+        if(!confirmPassword.equals(user.getPassword())){
+            return "redirect:/register?mismatch";
+        }
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
-        if(users.findByUsername(user.getUsername()) == null && users.findByEmail(user.getEmail()) == null){
-            users.save(user);
-            return "redirect:/login";
-        }
-        return "redirect:/login?error";
+        return "redirect:/login";
     }
+
 }
