@@ -1,7 +1,7 @@
-package com.codeup.investible.controllers.;
+package com.codeup.investible.controllers;
 
-import com.blog.blog.models.Post;
-import com.blog.blog.services.PostService;
+import com.codeup.investible.Models.Company;
+
 import com.codeup.investible.services.CompanyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,30 +26,5 @@ public class CompanyController {
         viewModel.addAttribute("company", companySvc.findOne(id));
         return "companies/show";
     }
-
-    @GetMapping("/posts/create")
-    public String postCreateForm(Model model) {
-        model.addAttribute("post", new Post());
-        return "posts/create";
-    }
-
-    @PostMapping("/posts/create")
-    public String insertPost(@ModelAttribute Post post) {
-        postSvc.save(post);
-        return "redirect:/posts";
-    }
-
-    @GetMapping("/posts/{id}/edit")
-    public String postEditForm(@PathVariable long id, Model model) {
-        model.addAttribute("post", postSvc.findOne(id));
-        return "posts/edit";
-    }
-
-    @PostMapping("/posts/{id}/edit")
-    public String updatePost(@ModelAttribute Post post) {
-        // postSvc.save(post);
-        System.out.println("Post updated!");
-        return "redirect:/posts";
-    }
-
 }
+
