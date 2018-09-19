@@ -1,0 +1,107 @@
+<!DOCTYPE>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>The Graph API For Investible/Active</title>
+    <!--<link rel="stylesheet" type="text/css" href="style.css" />-->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+    <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>-->
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet">
+</head>
+
+<body>
+<h1>Graphing for Investment</h1>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<p>This page lets you see the ups and down of each company.</p>
+<textarea id="searchbox"></textarea>
+<input type="button" value="Search!" onclick="doSearch()">
+<div id="resultsdiv"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawVisualization);
+
+    function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+            ['Company', 'Google', 'Apple', 'Microsoft', 'Qualys', 'Fireye', 'Rapid7', 'Pivotal', 'Twilio', 'Groupon', 'Wayfair', 'Roku', 'Box'],
+            ['2015/16',  165,      938,         522,      998,       450,      614.6,    938,       564,      884,     990.0,      450,    575],
+            ['2015/16',  135,      1120,        599,     1268,       288,      682,      750,       690,      889,      94,        450,    575],
+            ['2016/17',  157,      1167,        587,      807,       397,      623,      687,       104,      650,      893,       450,    575],
+            ['2016/17',  157,      1167,        587,      807,       397,      623,      970,       494,      990,      990,       450,    575],
+            ['2017/18',  157,      1167,        587,      807,       397,      623,      445,       722,      345,      456,       450,    575],
+            ['2017/18',  139,      1110,        615,      968,       215,      609.4,    324,       944,      345,      233,       450,    575],
+            ['2018/19',  136,      691,         629,     1026,       366,      569.6,    1000,      774,      345,      145,       450,    575]
+        ]);
+
+        var options = {
+            title : 'Monthly Investment Production by Company',
+            vAxis: {title: 'Stock'},
+            hAxis: {title: 'Month'},
+            seriesType: 'bars',
+            series: {12: {type: 'line'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>
+<script>
+    // Do the API call
+    $.ajax({
+        url: "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT&outputsize=full\&apikey=N24XNC0U6S1B605Y",
+        type: 'GET',
+        // data: {q : searchterm},
+        success: function(r){
+            console.log(r);
+        },
+        error: function(e){
+            alert("Something went wrong: " + e);
+        }
+    });
+
+
+    function displayResults(results){
+// display the results of the query
+// get the div where the results will be shown
+        var showdiv = document.getElementById("resultsdiv");
+// empty that div of its current contents
+        showdiv.innerHTML = "";
+        var titleInfo, title, companyInfo, company; // create a variable or two
+// cycle through each of the elements of the results array
+        for (i=0; i< results.item.length; i++) {
+// get the company
+            companyInfo = results.item[i].contributor;
+// if there was no company key, provide some helpful content
+            if (companyInfo == undefined) {
+                companyInfo = "[No company listed]";
+            }
+// is it an array?
+            if ($.isArray(companyInfo)) {
+                company = companyInfo.join("; ");
+            }
+            else { // if it's not an Array
+                company = companyInfo;
+            }
+        }
+    }
+    function doSearch() {
+// Do the search
+        var searchbx = document.getElementById("searchbox"); // get the searchbox
+        var searchterm = searchbx.value; // get the search term
+// if it's blank, give up
+        if (searchterm == "") {
+            alert("Enter a search term"); // put up an explanation for the user
+            return; // jump out of this funciton
+        }
+    }
+
+</script>
+<div id="chart_div" style="width: 900px; height: 500px;"></div>
+</body>
+<!--<script src="/scripts/graphs.js"></script>-->
+</html>
