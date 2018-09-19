@@ -54,6 +54,7 @@ public class AuthenticationController {
         }
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
+        users.save(user);
         return "redirect:/login";
     }
 
