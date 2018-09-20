@@ -39,23 +39,23 @@ public class AuthenticationController {
     @PostMapping("/register")
     public String saveUser(@ModelAttribute User user, @RequestParam(name ="confirmPassword") String confirmPassword){
         if(users.findByUsername(user.getUsername()) != null){
-            return "redirect:/edit?username";
+            return "redirect:/register?username";
         }
         if(users.findByEmail(user.getEmail()) != null){
-            return "redirect:/edit?email";
+            return "redirect:/register?email";
         }
         if(     !user.getUsername().matches("[a-zA-Z0-9]+") ||
                 !user.getPassword().matches("[a-zA-Z0-9]+") ||
                 !user.getFirstName().matches("[a-zA-Z0-9]+") ||
                 !user.getLastName().matches("[a-zA-Z0-9]+")
                 ){
-            return "redirect:/edit?char";
+            return "redirect:/register?char";
         }
         if(!confirmPassword.equals(user.getPassword())){
-            return "redirect:/edit?mismatch";
+            return "redirect:/register?mismatch";
         }
         if(user.getUsername().equals(user.getPassword())){
-            return "redirect:/edit?userpass";
+            return "redirect:/register?userpass";
         }
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
