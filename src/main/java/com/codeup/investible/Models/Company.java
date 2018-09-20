@@ -1,8 +1,7 @@
 package com.codeup.investible.Models;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 import javax.persistence.*;
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Entity
@@ -32,12 +31,6 @@ public class Company {
 
     @Column
     private double sales;
-
-//    @Column
-//    private double yearHigh;
-
-//    @Column
-//    private double yearLow;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
     private List<Comment> comments;
@@ -89,61 +82,59 @@ public class Company {
         this.ticker = ticker;
     }
 
-    public double getNetIncome() {
-        return netIncome;
+    public String getNetIncome() {
+
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        df.setMaximumFractionDigits(0);
+
+        return df.format(netIncome);
     }
 
     public void setNetIncome(double netIncome) {
         this.netIncome = netIncome;
     }
 
-    public double getEps() {
-        return eps;
-    }
+    public double getEps() { return eps; }
 
     public void setEps(double eps) {
         this.eps = eps;
     }
 
-    public double getTotalAssets() {
-        return totalAssets;
+    public String getTotalAssets() {
+
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        df.setMaximumFractionDigits(0);
+
+        return df.format(totalAssets);
     }
 
     public void setTotalAssets(double totalAssets) {
         this.totalAssets = totalAssets;
     }
 
-    public double getTotalLiabilities() {
-        return totalLiabilities;
+    public String getTotalLiabilities() {
+
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        df.setMaximumFractionDigits(0);
+
+        return df.format(totalLiabilities);
     }
 
     public void setTotalLiabilities(double totalLiabilities) {
         this.totalLiabilities = totalLiabilities;
     }
 
-    public double getSales() {
-        return sales;
+    public String getSales() {
+
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        df.setMaximumFractionDigits(0);
+
+        return df.format(sales);
     }
 
     public void setSales(double sales) {
         this.sales = sales;
     }
-
-//    public double getYearHigh() {
-//        return yearHigh;
-//    }
-//
-//    public void setYearHigh(double yearHigh) {
-//        this.yearHigh = yearHigh;
-//    }
-//
-//    public double getYearLow() {
-//        return yearLow;
-//    }
-//
-//    public void setYearLow(double yearLow) {
-//        this.yearLow = yearLow;
-//    }
 
     public List<Comment> getComments() {
         return comments;

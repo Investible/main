@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Company View</title>
+    <title th:text="${company.name}"></title>
 </head>
 <body>
+
+<!--<nav th:replace="partials :: navbar" />-->
+
+<h2 th:text="${company.name}"></h2>
+
+<p>Ticker: <span th:text="${company.ticker}"></span><br />
+    Income: <span th:text="${company.getNetIncome()}"></span><br />
+    Earnings Per Share: <span th:text="${company.eps}"></span><br />
+    Total Assets: <span th:text="${company.getTotalAssets()}"></span><br />
+    Total Liabilities: <span th:text="${company.getTotalLiabilities()}"></span><br />
+    Total Sales: <span th:text="${company.getSales()}"></span></p>
 
 </body>
 </html>
