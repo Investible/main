@@ -79,10 +79,7 @@ public class AuthenticationController {
                              ) {
 
         User existingUser = users.findOne(id);
-        System.out.println(existingUser.getUsername());
-        System.out.println(firstName);
-        System.out.println(lastName);
-        System.out.println(email);
+
 
         user.setId(id);
         user.setUsername(existingUser.getUsername());
@@ -96,9 +93,6 @@ public class AuthenticationController {
         users.save(user);
         userSvc.authenticate(user);
 
-        System.out.println(user.getFirstName());
-        System.out.println(user.getLastName());
-        System.out.println(user.getEmail());
         return "redirect:/profile";
     }
 
