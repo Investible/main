@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8" />
+    <title>Profile</title>
+</head>
+<body>
+
+<p th:text="${#authentication.principal.username}"></p>
+<p th:text="${#authentication.principal.firstName}"></p>
+<p th:text="${#authentication.principal.lastName}"></p>
+<p th:text="${#authentication.principal.email}"></p>
+<p th:text="${#authentication.principal.id}"></p>
+
+<form th:action="@{/profile/{id}/edit(id =${#authentication.principal.id})}">
+    <button type="submit">Edit Profile</button>
+</form>
+
+
+
+</body>
+</html>
