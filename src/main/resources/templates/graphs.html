@@ -41,7 +41,7 @@
         var options = {
             title : 'Monthly Investment Production by Company',
             vAxis: {title: 'Stock'},
-            hAxis: {title: 'Month'},
+            hAxis: {title: 'Year'},
             seriesType: 'bars',
             series: {12: {type: 'line'}}
         };
@@ -51,55 +51,68 @@
     }
 </script>
 <script>
-    // Do the API call
-    $.ajax({
-        url: "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT&outputsize=full\&apikey=N24XNC0U6S1B605Y",
-        type: 'GET',
-        // data: {q : searchterm},
-        success: function(r){
-            console.log(r);
-        },
-        error: function(e){
-            alert("Something went wrong: " + e);
+    // var graphsInfo = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT&outputsize=full\&apikey=N24XNC0U6S1B605Y';
+    //     // Do the API call
+    // fetch(graphsInfo)
+    //     .then(function (response) {
+    //         return response.json();
+    //     }).then(function(data) {
+    //         for (var i=0; i<graphsInfo; i++){
+    //             displayResults(drawVisualization());
+    //         }
+    //         // console.log(data.response);
+    //     });
+
+    var GRAPHS_CONTAINER = document.querySelector("#news_data");
+
+    function requestURL() {
+        var
+            BASE_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT&outputsize=full&?",
+            COUNTRY_PARAM = "country=us&",
+            GRAPHS_CATEGORY = "category=business&",
+            GRAPHS_APIKEY = "apikey=N24XNC0U6S1B605Y"
+
+        return [BASE_URL, COUNTRY_PARAM, GRAPHS_CATEGORY, GRAPHS_APIKEY].join('')
+    }
+
+    async function fetchGraphs() {
+        try {
+            var response = await fetch(requestURL())
+            var data = await response.json();
+            return data.articles;
+        } catch (e) {
+            console.log("Error!", e);
         }
+    }
+
+    async function buildGraphsHTML(){
+        var graphsArray = await fetchGraphs()
+
+        var graphsHTML = "";
+
+        for await(let graphs of graphsArray){
+            graphsHTML += `
+      <div class='graphs-container'>
+          <h2 class='meta_data-information'>${graphs.Information}</h2>
+          <p class='meta_data-symbol'>${graphs.symbol}</p>
+          <p class='meta_data-lastRefeshed'>${graphs.LastRefreshed}</p>
+          <p class='meta_data-outputSize'>${graphs.OutputSize}</p>
+          <h3 class='meta_data-timeZone'>By ${article.TimeZone}</h3>
+          <p class='meta_data-content'>${article.volume}</p>
+          // <img src='${article.urlToImage}' alt='${article.title}'>
+
+      </div>
+    `
+        }
+
+        console.log(graphsHTML)
+        GRAPHS_CONTAINER.insertAdjacentHTML('afterbegin', graphsHTML)
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        buildGraphsHTML()
     });
-
-
-    function displayResults(results){
-// display the results of the query
-// get the div where the results will be shown
-        var showdiv = document.getElementById("resultsdiv");
-// empty that div of its current contents
-        showdiv.innerHTML = "";
-        var titleInfo, title, companyInfo, company; // create a variable or two
-// cycle through each of the elements of the results array
-        for (i=0; i< results.item.length; i++) {
-// get the company
-            companyInfo = results.item[i].contributor;
-// if there was no company key, provide some helpful content
-            if (companyInfo == undefined) {
-                companyInfo = "[No company listed]";
-            }
-// is it an array?
-            if ($.isArray(companyInfo)) {
-                company = companyInfo.join("; ");
-            }
-            else { // if it's not an Array
-                company = companyInfo;
-            }
-        }
-    }
-    function doSearch() {
-// Do the search
-        var searchbx = document.getElementById("searchbox"); // get the searchbox
-        var searchterm = searchbx.value; // get the search term
-// if it's blank, give up
-        if (searchterm == "") {
-            alert("Enter a search term"); // put up an explanation for the user
-            return; // jump out of this funciton
-        }
-    }
-
 </script>
 <div id="chart_div" style="width: 900px; height: 500px;"></div>
 </body>
