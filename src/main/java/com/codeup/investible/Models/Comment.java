@@ -24,6 +24,12 @@ public class Comment {
     @JoinColumn(name="user_id")
     private User user;
 
+<<<<<<< HEAD
+=======
+    public Comment() {
+    }
+
+>>>>>>> a709d539558fdb00b4337dfdb3c47a1b085073db
     public Comment(String body, Date timeStamp, Company company, User user) {
         this.body = body;
         this.timeStamp = timeStamp;
@@ -31,6 +37,7 @@ public class Comment {
         this.user = user;
     }
 
+<<<<<<< HEAD
     public Comment(String body){
         this.body = body;
     }
@@ -39,6 +46,8 @@ public class Comment {
 
     }
 
+=======
+>>>>>>> a709d539558fdb00b4337dfdb3c47a1b085073db
     public long getId() {
         return id;
     }
@@ -78,5 +87,8 @@ public class Comment {
     public void setUser(User user) {
         this.user = user;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> a709d539558fdb00b4337dfdb3c47a1b085073db
 }

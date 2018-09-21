@@ -16,7 +16,6 @@ import java.util.List;
     public class CommentController {
 
         private final CommentRepository commentRepository;
-        //CommentRepository commentRepository;
         private UserRepository userRepository;
 
         public CommentController(CommentRepository commentRepository, UserRepository userRepository) {
@@ -38,7 +37,7 @@ import java.util.List;
 
         @GetMapping("/posts/create")
         public String postCreateForm(Model model) {
-            model.addAttribute("post", new Comment());
+            model.addAttribute("comment", new Comment(id));
             return "posts/create";
         }
 
@@ -80,3 +79,4 @@ import java.util.List;
         }
 
     }
+
