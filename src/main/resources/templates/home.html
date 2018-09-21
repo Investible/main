@@ -1,14 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <div th:replace="fragments/partials :: bootstrapHeaderBasic"></div>
 
-    <meta charset="UTF-8" />
-    <title>Home</title>
+    <title>Investoractive</title>
+
     <!-- include stylesheets, etc here -->
 
+    <div th:replace="fragments/partials :: bootstrapCSS"></div>
+</head>
 <body>
+<nav th:replace="fragments/partials :: navbar"></nav>
 
-<h1> This is the home page</h1>
 
+    <div class="jumbotron">
+        <img src="Image/placeholder.jpg" class="img-fluid" />
+        <hr class="my-4" />
+        <p>Something about Investoractive.com</p>
+    </div>
+
+
+
+
+<footer th:replace="fragments/partials :: footer"></footer>
+<div th:replace="fragments/partials :: javascript"></div>
 </body>
 </html>
 
