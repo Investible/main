@@ -3,19 +3,69 @@
 <head>
     <meta charset="UTF-8" />
     <title th:text="${company.name}"></title>
+    <style>
+        body{
+            background-color: #16425b;
+        }
+        img{
+            width: 100px;
+            height: 100px;
+            position: relative;
+            left: 50%;
+        }
+        .container{
+            width: 90%;
+            margin: auto;
+        }
+        p{
+            font-size: 2em;
+            font-family: Optima, serif;
+        }
+        h2{
+            font-size: 3em;
+            color: white;
+            margin-bottom: 2em;
+        }
+
+        h4{
+            font-size: 2em;
+            color: white;
+        }
+
+        span{
+            float:right;
+            margin-right: 1em;
+        }
+
+    </style>
 </head>
 <body>
 
 <!--<nav th:replace="partials :: navbar" />-->
 
-<h2 th:text="${company.name}"></h2>
+<div class="container">
 
-<p>Ticker: <span th:text="${company.ticker}"></span><br />
-    Income: <span th:text="${company.getNetIncome()}"></span><br />
-    Earnings Per Share: <span th:text="${company.eps}"></span><br />
-    Total Assets: <span th:text="${company.getTotalAssets()}"></span><br />
-    Total Liabilities: <span th:text="${company.getTotalLiabilities()}"></span><br />
-    Total Sales: <span th:text="${company.getSales()}"></span></p>
+    <h2 th:text="${company.name}"></h2>
+
+    <h4>Company Data (This Year): </h4>
+    <p>Ticker: <span th:text="${company.ticker}"></span><br /><br />
+    Net Income: <span th:text="${company.getNetIncome()}"></span><br /><br />
+    Earnings Per Share: <span th:text="${company.eps}"></span><br /><br />
+    Total Assets: <span th:text="${company.getTotalAssets()}"></span><br /><br />
+    Total Liabilities: <span th:text="${company.getTotalLiabilities()}"></span><br /><br />
+    Total Sales Revenue: <span th:text="${company.getSales()}"></span></p>
+
+    <!--Will need to get connected to comments-->
+    <!--<form th:action="@{/placeholder}" th:object="${comment}" method="post" role="form">-->
+<!---->
+        <!--<h3>Comment</h3>-->
+<!---->
+        <!--<input th:field="*{body}" required="required" />-->
+<!---->
+        <!--<button>Submit</button>-->
+    <!--</form>-->
+
+</div>
 
 </body>
 </html>
