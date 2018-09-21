@@ -3,19 +3,55 @@
 <head>
     <meta charset="UTF-8" />
     <title>Company Index</title>
+    <style>
+
+        body{
+            background-color: #16425b;
+        }
+
+        .companyPanel{
+            width: 45%;
+            float: left;
+            display: inline;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .container{
+            width: 90%;
+            margin-left: 10%;
+        }
+
+        h2, h4{
+            color: white;
+        }
+    </style>
 </head>
 <body>
 
 <!--<nav th:replace="partials :: navbar" />-->
 
-<div th:each="company : ${companies}">
+<div class="container">
+
+<div class="companyPanel" th:each="company : ${companies}">
+
     <h2 th:text="${company.name}"></h2>
-    <p>Ticker: <span th:text="${company.ticker}"></span><br />
-    Income: <span th:text="${company.getNetIncome()}"></span><br />
-    Earnings Per Share: <span th:text="${company.eps}"></span><br />
-    Total Assets: <span th:text="${company.getTotalAssets()}"></span><br />
-    Total Liabilities: <span th:text="${company.getTotalLiabilities()}"></span><br />
-    Total Sales: <span th:text="${company.getSales()}"></span></p>
+
+    <h4>Company Data (Last Year):</h4>
+
+    <p>Ticker: <span th:text="${company.ticker}"></span><br /><br />
+        Net Income: <span th:text="${company.getNetIncome()}"></span><br /><br />
+        <!--Earnings Per Share: <span th:text="${company.eps}"></span><br /><br />-->
+        <!--Total Assets: <span th:text="${company.getTotalAssets()}"></span><br /><br />-->
+        <!--Total Liabilities: <span th:text="${company.getTotalLiabilities()}"></span><br /><br />-->
+        Total Sales Revenue: <span th:text="${company.getSales()}"></span></p>
+
+        <form th:action="@{/companies/{ticker}(ticker = ${company.ticker})}" method="GET">
+            <button>More Details</button>
+        </form>
+
+</div>
+
 </div>
 
 </body>
