@@ -10,7 +10,7 @@ public class Comment {
     @Id @GeneratedValue
     private long id;
 
-    @Column
+    @Column(nullable = false)
     private String body;
 
     @Column
@@ -23,5 +23,60 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
+
+    public Comment(String body, Date timeStamp, Company company, User user) {
+        this.body = body;
+        this.timeStamp = timeStamp;
+        this.company = company;
+        this.user = user;
+    }
+
+    public Comment(String body){
+        this.body = body;
+    }
+
+    public Comment(){
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public Date getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Date timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
 }
