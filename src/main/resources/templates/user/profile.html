@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <meta charset="UTF-8" />
+    <div th:replace="fragments/partials :: bootstrapHeaderBasic"></div>
     <title>Profile</title>
+    <div th:replace="fragments/partials :: bootstrapCSS"></div>
 </head>
 <body>
+<nav th:replace="fragments/partials :: navbar"></nav>
 
 <p th:text="${#authentication.principal.username}"></p>
 <p th:text="${#authentication.principal.firstName}"></p>
@@ -17,6 +19,7 @@
 </form>
 
 
-
+<footer th:replace="fragments/partials :: footer"></footer>
+<div th:replace="fragments/partials :: javascript"></div>
 </body>
 </html>
