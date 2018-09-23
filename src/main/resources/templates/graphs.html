@@ -1,17 +1,12 @@
-<!DOCTYPE>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>The Graph API For Investible/Active</title>
-    <!--<link rel="stylesheet" type="text/css" href="style.css" />-->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
-    <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>-->
-    <script
-            src="https://code.jquery.com/jquery-2.2.4.min.js"
-            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-            crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet">
 </head>
-
 <body>
 <h1>Graphing for Investment</h1>
 <nav th:replace="fragments/navbar :: navbar"></nav>
@@ -46,38 +41,34 @@
             series: {12: {type: 'line'}}
         };
 
-        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.ComboChart(document.getElementById('graph_charts'));
         chart.draw(data, options);
     }
 </script>
+
+<div id="graph_charts" style="width: 900px; height: 500px;"></div>
+<div id="news_data"></div>
+
 <script>
-    // var graphsInfo = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT&outputsize=full\&apikey=N24XNC0U6S1B605Y';
-    //     // Do the API call
-    // fetch(graphsInfo)
-    //     .then(function (response) {
-    //         return response.json();
-    //     }).then(function(data) {
-    //         for (var i=0; i<graphsInfo; i++){
-    //             displayResults(drawVisualization());
-    //         }
-    //         // console.log(data.response);
-    //     });
 
-    var GRAPHS_CONTAINER = document.querySelector("#news_data");
+    var NEWS_FEED_CONTAINER = document.querySelector("#news_data");
+    var GRAPHS_CONTAINER = document.querySelector("#graph_charts");
+    var GRAPHS_BASE_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT&outputsize=full&datatype=json&";
+    var ARTICLES_BASE_URL = "https://newsapi.org/v2/top-headlines?";
+    var ARTICLES_APIKEY = "apiKey=99df6baec7fb440291394e15ceb17586";
+    var GRAPHS_APIKEY = "apikey=N24XNC0U6S1B605Y";
 
-    function requestURL() {
+    function requestURL(baseURL, apiKey) {
         var
-            BASE_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT&outputsize=full&?",
             COUNTRY_PARAM = "country=us&",
-            GRAPHS_CATEGORY = "category=business&",
-            GRAPHS_APIKEY = "apikey=N24XNC0U6S1B605Y"
+            CATEGORY = "category=business&"
 
-        return [BASE_URL, COUNTRY_PARAM, GRAPHS_CATEGORY, GRAPHS_APIKEY].join('')
+        return [GRAPHS_BASE_URL, GRAPHS_CONTAINER, CATEGORY, GRAPHS_APIKEY].join('')
     }
 
-    async function fetchGraphs() {
+    async function fetchArticles() {
         try {
-            var response = await fetch(requestURL())
+            var response = await fetch(requestURL(GRAPHS_BASE_URL, GRAPHS_APIKEY))
             var data = await response.json();
             return data.articles;
         } catch (e) {
@@ -85,36 +76,58 @@
         }
     }
 
-    async function buildGraphsHTML(){
-        var graphsArray = await fetchGraphs()
+    async function buildArticlesHTML(){
+        var articlesArray = await fetchArticles()
 
-        var graphsHTML = "";
+        var articlesHTML = "";
 
-        for await(let graphs of graphsArray){
-            graphsHTML += `
-      <div class='graphs-container'>
-          <h2 class='meta_data-information'>${graphs.Information}</h2>
-          <p class='meta_data-symbol'>${graphs.symbol}</p>
-          <p class='meta_data-lastRefeshed'>${graphs.LastRefreshed}</p>
-          <p class='meta_data-outputSize'>${graphs.OutputSize}</p>
-          <h3 class='meta_data-timeZone'>By ${article.TimeZone}</h3>
-          <p class='meta_data-content'>${article.volume}</p>
-          // <img src='${article.urlToImage}' alt='${article.title}'>
-
+        for await(let article of articlesArray){
+            articlesHTML += `
+      <div class='article-container'>
+          <h2 class='article-title'>${article.title}</h2>
+          <p class='article-description'>${article.description}</p>
+          <p class='article-timestamp'>${article.publishedAt}</p>
+          <h3 class='article-author'>By ${article.author}</h3>
+          <img src='${article.urlToImage}' alt='${article.title}'>
+          <p class='article-content'>${article.content}</p>
       </div>
     `
         }
+        NEWS_FEED_CONTAINER.insertAdjacentHTML('afterbegin', articlesHTML)
+    }
+
+    async function fetchGraphs() {
+        try {
+            var response = await fetch(requestURL(GRAPHS_BASE_URL, GRAPHS_APIKEY))
+            var data = await response.json();
+            return alpha.data.batch([`MSFT`, `AAPL`, `GOOGL`, `OLYS`,`FEYE`, `RPD`, `TWLO`, `W`, `ROKU`, `BOX`, `PSTG`, `GRPN`]).then(data => {
+                console.log(data);
+            });;
+        } catch (e) {
+            console.log("Error!", e);
+        }
+    }
+
+    async function buildGraphsHTML(){
+        var graphObj = Object.entries(await fetchGraphs())
+        var graphMetaData = graphObj[0][1]
+        var graphCompanySymbol = Object.values(graphMetaData)[1]
+        var graphTimeSeries = graphObj[1][1]
+
+        console.log(graphCompanySymbol, graphTimeSeries)
+        Object.entries(graphTimeSeries).forEach(
+            ([key,value]) => console.log(key,value)
+        )
 
         console.log(graphsHTML)
         GRAPHS_CONTAINER.insertAdjacentHTML('afterbegin', graphsHTML)
     }
 
-
     document.addEventListener('DOMContentLoaded', function () {
+        buildArticlesHTML()
         buildGraphsHTML()
     });
+
 </script>
-<div id="chart_div" style="width: 900px; height: 500px;"></div>
 </body>
-<!--<script src="/scripts/graphs.js"></script>-->
 </html>
