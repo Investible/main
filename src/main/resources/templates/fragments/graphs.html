@@ -54,13 +54,15 @@
             console.log(data);
             var series = data["Monthly Time Series"];
             var output = [];
-            output.push(["month", data["Meta Data"]["2. Symbol"]]);
 
             for (key in series) {
                 var price = series[key]["4. close"];
                 price = parseFloat(price)
                 output.push([key, price])
             }
+            output.reverse()
+            output.unshift(["month", data["Meta Data"]["2. Symbol"]]);
+
             console.log(output)
             google.charts.setOnLoadCallback(function (){
                 drawVisualization(output)
@@ -88,7 +90,7 @@
 
     document.addEventListener('DOMContentLoaded', function () {
         // buildGraphsHTML()
-        getStockGraphData("MSFT");
+        getStockGraphData("GOOGL");
     });
 
 </script>
