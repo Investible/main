@@ -1,52 +1,47 @@
 package com.codeup.investible.controllers;
 
 import com.codeup.investible.Models.Comment;
+import com.codeup.investible.Models.Company;
 import com.codeup.investible.Models.User;
 import com.codeup.investible.Repository.CommentRepository;
+import com.codeup.investible.Repository.CompanyRepository;
 import com.codeup.investible.Repository.UserRepository;
 //import com.codeup.investible.services.CommentService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.time.Instant;
+import java.util.Date;
 
 
 @Controller
     public class CommentController {
 
-        private final CommentRepository commentRepository;
+    private final CommentRepository commentRepository;
+        private final CompanyRepository companyRepo;
         private UserRepository userRepository;
 
-        public CommentController(CommentRepository commentRepository, UserRepository userRepository) {
+        public CommentController(CommentRepository commentRepository, CompanyRepository companyRepo, UserRepository userRepository) {
             this.commentRepository = commentRepository;
             this.userRepository = userRepository;
+            this.companyRepo = companyRepo;
         }
 
-        @GetMapping("/home")
-        public String index(Model viewModel) {
-            viewModel.addAttribute("comments",commentRepository.findAll() );
-            return "comments/comments";
+        @PostMapping("/company/{companyId}/comment/create")
+        public String insertPost(@PathVariable Long companyId, @RequestParam(name = "body") String body, @ModelAttribute Comment comment, Model model) {
+            System.out.println("get here");
+            Company company = companyRepo.findOne(companyId);
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("isLoggedIn", user != null);
+            comment.setBody(body);
+            comment.setTimeStamp(Date.from(Instant.now()));
+            comment.setCompany(company);
+            comment.setUser(user);
+            commentRepository.save(comment);
+            return "redirect:/home";
         }
-
-        @GetMapping("/comments/{id}")
-        public String show(@PathVariable long id, Model viewModel) {
-            viewModel.addAttribute("comment", commentRepository.findOne(id));
-            return "comments/show";
-        }
-
-        @GetMapping("/posts/create")
-        public String postCreateForm(Model model) {
-            model.addAttribute("comment", new Comment(id));
-            return "posts/create";
-        }
-
-//        @PostMapping("/posts/create")
-//        public String insertPost(@ModelAttribute Comment comment) {
-//            comment.setUser(userRepository.findOne(2L));
-//            CommentRepository.save(comment);
-//            return "redirect:/posts";
-//        }
 
         @GetMapping("/posts/{id}/edit")
         public String postEditForm(@PathVariable long id, Model model) {
