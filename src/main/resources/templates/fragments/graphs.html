@@ -37,35 +37,11 @@
             title : 'Monthly Investment Production by Company',
             vAxis: {title: 'Stock'},
             hAxis: {title: 'Year'},
-            seriesType: 'bars',
+            seriesType: 'line',
             series: {12: {type: 'line'}}
         };
 
-        var chart = new google.visualization.ComboChart(document.getElementById('graph_charts'));
-        chart.draw(data, options);
-    }
-</script>
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-    google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Apple', 'Hours per Day'],
-            ['Google',     11],
-            ['Box',      2],
-            ['Twlo',  3],
-            ['Roku', 8],
-            ['Mircsoft',    5]
-        ]);
-
-        var options = {
-            title: 'My Daily Stock',
-            is3D: true,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        var chart = new google.visualization.LineChart(document.getElementById('graph_charts'));
         chart.draw(data, options);
     }
 </script>
@@ -75,55 +51,32 @@
 
 <script>
 
-    var NEWS_FEED_CONTAINER = document.querySelector("#news_data");
     var GRAPHS_CONTAINER = document.querySelector("#graph_charts");
-    var ARTICLES_BASE_URL = "https://newsapi.org/v2/top-headlines?";
-    var ARTICLES_APIKEY = "apiKey=99df6baec7fb440291394e15ceb17586";
 
     function getStockGraphData(stockSymbol){
         buildGraphsHTML(stockSymbol)
     }
 
-
-    // async function fetchArticles() {
-    //     try {
-    //         var response = await fetch(requestURL(A_BASE_URL, GRAPHS_APIKEY))
-    //         var data = await response.json();
-    //         return data.articles;
-    //     } catch (e) {
-    //         console.log("Error!", e);
-    //     }
-    // }
-
-    // async function buildArticlesHTML(){
-    //     var articlesArray = await fetchArticles()
-    //
-    //     var articlesHTML = "";
-    //
-    //     for await(let article of articlesArray){
-    //         articlesHTML += `
-    //   <div class='article-container'>
-    //       <h2 class='article-title'>${article.title}</h2>
-    //       <p class='article-description'>${article.description}</p>
-    //       <p class='article-timestamp'>${article.publishedAt}</p>
-    //       <h3 class='article-author'>By ${article.author}</h3>
-    //       <img src='${article.urlToImage}' alt='${article.title}'>
-    //       <p class='article-content'>${article.content}</p>
-    //   </div>
-    // `
-    //     }
-    //     NEWS_FEED_CONTAINER.insertAdjacentHTML('afterbegin', articlesHTML)
-    // }
-
     async function fetchGraphs(stockSymbol) {
-        var url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + stockSymbol + "&outputsize=full&datatype=json&apikey=N24XNC0U6S1B605Y";
+        var url = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=" + stockSymbol + "&outputsize=full&datatype=json&apikey=N24XNC0U6S1B605Y";
 
         try {
             var response = await fetch(url)
             var data = await response.json();
             console.log(data);
+            var series = data["Monthly Time Series"];
+
+            var output = [
+                "month", data["Meta Data"]["2. Symbol"]
+            ]
+
+            for (key in series) {
+                var price = series[key]["4. close"]
+                output.push([key, price])
+
+            }
+            console.log(output)
             return data.batch([`MSFT`, `AAPL`, `GOOGL`, `OLYS`,`FEYE`, `RPD`, `TWLO`, `W`, `ROKU`, `BOX`, `PSTG`, `GRPN`]).then(data => {
-                // console.log(data);
             });;
         } catch (e) {
             console.log("Error!", e);
@@ -144,7 +97,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        // buildArticlesHTML()
         // buildGraphsHTML()
         getStockGraphData("MSFT")
     });
