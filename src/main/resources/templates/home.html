@@ -5,21 +5,6 @@
 
     <title>Investoractive</title>
 
-<<<<<<< HEAD
-
-
-<main class="container">
-    <h1>These are all the comments</h1>
-
-    <div th:each="comment : ${comments}">
-        <!--<h2 th:text="${post.title}"></h2>-->
-        <p th:text="${comment.body}"></p>
-        <button class="btn btn-primary">Comment</button>
-    </div>
-
-</main>
-
-=======
     <!-- include stylesheets, etc here -->
 
     <div th:replace="fragments/partials :: bootstrapCSS"></div>
@@ -34,12 +19,38 @@
         <p>Something about Investoractive.com</p>
     </div>
 
+<div th:each="company : ${companies}">
+    <!--<h2 th:text="${company.name}"></h2>-->
+
+    <!--<h4>Company Data (This Year): </h4>-->
+    <!--<p>Ticker: <span th:text="${company.ticker}"></span><br /><br /></p>-->
+        <!--Net Income: <span th:text="${company.getNetIncome()}"></span><br /><br />-->
+        <!--Earnings Per Share: <span th:text="${company.eps}"></span><br /><br />-->
+        <!--Total Assets: <span th:text="${company.getTotalAssets()}"></span><br /><br />-->
+        <!--Total Liabilities: <span th:text="${company.getTotalLiabilities()}"></span><br /><br />-->
+        <!--Total Sales Revenue: <span th:text="${company.getSales()}"></span></p>-->
+
+    <!--COMMENTS-->
+        <div th:each="comment : ${company.getComments()}">
+            <th:block th:include="fragments/partials :: comment"></th:block>
+        </div>
+
+    <!--New Comment Form-->
+    <div>
+        <!--<form th:action="@{'/company/' + ${company.id} + '/comment/create'}" method="post" th:object="${comment}">-->
+                <!--Comment:<br>-->
+            <!--<textarea name="comment"></textarea>-->
+                <!--<input type="submit" value="Submit"/>-->
+        <!--</form>-->
+</div>
+</div>
+
+
 
 
 
 <footer th:replace="fragments/partials :: footer"></footer>
 <div th:replace="fragments/partials :: javascript"></div>
 </body>
->>>>>>> a709d539558fdb00b4337dfdb3c47a1b085073db
 </html>
 

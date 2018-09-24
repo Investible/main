@@ -54,6 +54,16 @@
     Total Assets: <span th:text="${company.getTotalAssets()}"></span><br /><br />
     Total Liabilities: <span th:text="${company.getTotalLiabilities()}"></span><br /><br />
     Total Sales Revenue: <span th:text="${company.getSales()}"></span></p>
+    Comments:
+    <div th:each="comment : ${comments}">
+        <!--<th:block th:include="fragments/comments :: comment"></th:block>-->
+        <th:block th:include="fragments/partials :: comment"></th:block>
+        <form th:action="@{'/company/' + ${company.id} + '/comment/create'}" method="post" th:object="${comment}" th:if="${isLoggedIn}">
+            <textarea name="body"></textarea>
+            <input type="submit" value="Submit"/>
+        </form>
+    </div>
+
 
     <!--Will need to get connected to comments-->
     <!--<form th:action="@{/placeholder}" th:object="${comment}" method="post" role="form">-->

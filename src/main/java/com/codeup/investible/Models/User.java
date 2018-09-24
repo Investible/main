@@ -59,6 +59,7 @@ public class User implements Serializable {
         password = copy.password;
         firstName = copy.firstName;
         lastName = copy.lastName;
+        comments = copy.comments;
     }
 
     public long getId() {
