@@ -28,11 +28,42 @@
 <nav th:replace="fragments/partials :: navbar"></nav>
 
 
-    <div class="jumbotron">
-        <img src="Image/placeholder.jpg" class="img-fluid" />
-        <hr class="my-4" />
-        <p>Something about Investoractive.com</p>
+    <div class="jumbotron jumbotron-fluid">
+       <div class="header-box">
+           <h1>Investing</h1>
+           <p><h3>Making it simpler to begin</h3></p>
+           <div>
+               <form th:action="@{/about-us}">
+                   <button type="button" class="btn btn-primary">LEARN MORE</button>
+               </form>
+           </div>
+       </div>
     </div>
+
+
+<div class="container mt-3 homepage-info">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="../../img/up_arrow.jpg" class="img-thumbnail" height="400" width="400" />
+        </div>
+        <div class="col-md-6">
+            <p>
+                We have taken the 10k reports of various companies and displayed it on key numbers that you should focus on in the near future.
+            </p>
+        </div>
+    </div>
+    <div class="row centered mt-5 mb-5">
+        News Feed
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            Start a discussion with other user to broaden your verizon to help improve your understanding of the stock market.
+        </div>
+        <div class="col-md-6">
+            <!--This is where the most recent comments will be.-->
+        </div>
+    </div>
+</div>
 
 
 

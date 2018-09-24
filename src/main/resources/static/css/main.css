@@ -1,0 +1,44 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #16425b;
+    color: #16425b;
+}
+
+.jumbotron{
+    background-color: #2f6690;
+    color: #d9dcd6;
+    padding: 0;
+    margin: 0;
+    background-image: url("placeholder2.jpg");
+    /*background-image: image("placeholder2.jpg");*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 500px;
+}
+
+.jumbotron-fluid{
+    padding: 200px 25%;
+    margin: 0;
+}
+
+.btn-link{
+    text-decoration: none;
+    background-color: transparent;
+    color: rgba(255,255,255,.5);
+}
+
+.header-box{
+    background-color: rgba(0,0,0, .5);
+    color: white;
+    text-align: center;
+    /*padding: 25%;*/
+}
+
+.homepage-info{
+    background-color: #d9dcd6;
+}
+
+footer{
+    background-color: #565254;
+}
