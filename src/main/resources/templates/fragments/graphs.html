@@ -77,79 +77,76 @@
 
     var NEWS_FEED_CONTAINER = document.querySelector("#news_data");
     var GRAPHS_CONTAINER = document.querySelector("#graph_charts");
-    var GRAPHS_BASE_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT&outputsize=full&datatype=json&";
     var ARTICLES_BASE_URL = "https://newsapi.org/v2/top-headlines?";
     var ARTICLES_APIKEY = "apiKey=99df6baec7fb440291394e15ceb17586";
-    var GRAPHS_APIKEY = "apikey=N24XNC0U6S1B605Y";
 
-    function requestURL(baseURL, apiKey) {
-        var
-            COUNTRY_PARAM = "country=us&",
-            CATEGORY = "category=business&"
-
-        return [GRAPHS_BASE_URL, GRAPHS_CONTAINER, CATEGORY, GRAPHS_APIKEY].join('')
+    function getStockGraphData(stockSymbol){
+        buildGraphsHTML(stockSymbol)
     }
 
-    async function fetchArticles() {
+
+    // async function fetchArticles() {
+    //     try {
+    //         var response = await fetch(requestURL(A_BASE_URL, GRAPHS_APIKEY))
+    //         var data = await response.json();
+    //         return data.articles;
+    //     } catch (e) {
+    //         console.log("Error!", e);
+    //     }
+    // }
+
+    // async function buildArticlesHTML(){
+    //     var articlesArray = await fetchArticles()
+    //
+    //     var articlesHTML = "";
+    //
+    //     for await(let article of articlesArray){
+    //         articlesHTML += `
+    //   <div class='article-container'>
+    //       <h2 class='article-title'>${article.title}</h2>
+    //       <p class='article-description'>${article.description}</p>
+    //       <p class='article-timestamp'>${article.publishedAt}</p>
+    //       <h3 class='article-author'>By ${article.author}</h3>
+    //       <img src='${article.urlToImage}' alt='${article.title}'>
+    //       <p class='article-content'>${article.content}</p>
+    //   </div>
+    // `
+    //     }
+    //     NEWS_FEED_CONTAINER.insertAdjacentHTML('afterbegin', articlesHTML)
+    // }
+
+    async function fetchGraphs(stockSymbol) {
+        var url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + stockSymbol + "&outputsize=full&datatype=json&apikey=N24XNC0U6S1B605Y";
+
         try {
-            var response = await fetch(requestURL(GRAPHS_BASE_URL, GRAPHS_APIKEY))
+            var response = await fetch(url)
             var data = await response.json();
-            return data.articles;
-        } catch (e) {
-            console.log("Error!", e);
-        }
-    }
-
-    async function buildArticlesHTML(){
-        var articlesArray = await fetchArticles()
-
-        var articlesHTML = "";
-
-        for await(let article of articlesArray){
-            articlesHTML += `
-      <div class='article-container'>
-          <h2 class='article-title'>${article.title}</h2>
-          <p class='article-description'>${article.description}</p>
-          <p class='article-timestamp'>${article.publishedAt}</p>
-          <h3 class='article-author'>By ${article.author}</h3>
-          <img src='${article.urlToImage}' alt='${article.title}'>
-          <p class='article-content'>${article.content}</p>
-      </div>
-    `
-        }
-        NEWS_FEED_CONTAINER.insertAdjacentHTML('afterbegin', articlesHTML)
-    }
-
-    async function fetchGraphs() {
-        try {
-            var response = await fetch(requestURL(GRAPHS_BASE_URL, GRAPHS_APIKEY))
-            var data = await response.json();
-            return alpha.data.batch([`MSFT`, `AAPL`, `GOOGL`, `OLYS`,`FEYE`, `RPD`, `TWLO`, `W`, `ROKU`, `BOX`, `PSTG`, `GRPN`]).then(data => {
-                console.log(data);
+            console.log(data);
+            return data.batch([`MSFT`, `AAPL`, `GOOGL`, `OLYS`,`FEYE`, `RPD`, `TWLO`, `W`, `ROKU`, `BOX`, `PSTG`, `GRPN`]).then(data => {
+                // console.log(data);
             });;
         } catch (e) {
             console.log("Error!", e);
         }
     }
 
-    async function buildGraphsHTML(){
-        var graphObj = Object.entries(await fetchGraphs())
+    async function buildGraphsHTML(stockSymbol){
+        var graphObj = Object.entries(await fetchGraphs(stockSymbol))
         var graphMetaData = graphObj[0][1]
         var graphCompanySymbol = Object.values(graphMetaData)[1]
         var graphTimeSeries = graphObj[1][1]
-
         console.log(graphCompanySymbol, graphTimeSeries)
         Object.entries(graphTimeSeries).forEach(
             ([key,value]) => console.log(key,value)
         )
-
-        console.log(graphsHTML)
+        // console.log(graphsHTML)
         GRAPHS_CONTAINER.insertAdjacentHTML('afterbegin', graphsHTML)
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        buildArticlesHTML()
-        buildGraphsHTML()
+        // buildArticlesHTML()
+        // buildGraphsHTML()
+        getStockGraphData("MSFT")
     });
 
 </script>
