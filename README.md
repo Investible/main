@@ -14,7 +14,7 @@
 
 - [X]	Users will be able to see more information about a specific company on the companies’ page
 
-- [ ]	Users will be able to see other user’s comments on a companies’ page
+- [X]	Users will be able to see other user’s comments on a companies’ page
 
 - [ ]	There will be an index of all recent comments (Likely the home page)
 
