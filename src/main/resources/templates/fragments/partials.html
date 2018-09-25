@@ -76,6 +76,32 @@
 
     </th:block>
 
+    <!--"/company/{companyId}/comments"-->
+
+    <!--=============COMMENT FORM=============-->
+<th:block th:fragment="comment-form">
+
+    <div class="alert alert-info" th:if="${isDisabled}"><i class="fas fa-lock margin-right-lite"></i>This post is currently locked.</div>
+    <!--<div th:if="${!isDisabled} and (${isLoggedIn} and ${!isBanned})" class="commentFormWrapper margin-left-right">-->
+        <!--sec:authorize="isAuthenticated()"-->
+        <form action="#" th:action="@{/company/{id}/comments(id= ${company.id})}" method="post" th:object="${comment}" class="commentForm">
+            <div class="form-group">
+                <label for="commentFormBody"></label>
+                <textarea class="form-control" id="commentFormBody" name="body"
+                          th:field="*{body}"
+                          th:placeholder="Comment...">
+                            </textarea>
+
+                <div class="commentsErrorAJAX"></div>
+                <!-- ======================== submit comment ================================-->
+
+                <input class="form-control" type="hidden" id="postId" th:value="${company.id}"/>
+                <button class="btn btn-primary commentSubmitBtn">
+                    <i class="far fa-comment-alt"></i> Comment
+                </button>
+            </div>
+        </form>
+</th:block>
 
 
 
