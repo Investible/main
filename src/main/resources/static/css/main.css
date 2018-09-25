@@ -10,7 +10,7 @@ body{
     padding: 0;
     margin: 0;
     background-image: url("placeholder2.jpg");
-    /*background-image: image("placeholder2.jpg");*/
+    background-image: image("placeholder2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
