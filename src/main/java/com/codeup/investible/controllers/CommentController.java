@@ -29,7 +29,7 @@ import java.util.Date;
             this.companyRepo = companyRepo;
         }
 
-        @PostMapping("/company/{companyId}/comment/create")
+        @PostMapping("/company/{companyId}/comments")
         public String insertPost(@PathVariable Long companyId, @RequestParam(name = "body") String body, @ModelAttribute Comment comment, Model model) {
             System.out.println("get here");
             Company company = companyRepo.findOne(companyId);
@@ -40,7 +40,7 @@ import java.util.Date;
             comment.setCompany(company);
             comment.setUser(user);
             commentRepository.save(comment);
-            return "redirect:/home";
+            return "redirect:/company/${ticker}";
         }
 
         @GetMapping("/posts/{id}/edit")

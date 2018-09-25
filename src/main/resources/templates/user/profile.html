@@ -8,13 +8,13 @@
 <body>
 <nav th:replace="fragments/partials :: navbar"></nav>
 
-<p th:text="${#authentication.principal.username}"></p>
-<p th:text="${#authentication.principal.firstName}"></p>
-<p th:text="${#authentication.principal.lastName}"></p>
-<p th:text="${#authentication.principal.email}"></p>
-<p th:text="${#authentication.principal.id}"></p>
+<p th:text="${profileOwner.username}"></p>
+<p th:text="${profileOwner.firstName}"></p>
+<p th:text="${profileOwner.lastName}"></p>
+<p th:text="${profileOwner.email}"></p>
+<p th:text="${profileOwner.id}"></p>
 
-<form th:action="@{/profile/{id}/edit(id =${#authentication.principal.id})}">
+<form th:if="${isProfileOwner}" th:action="@{/profile/{id}/edit(id =${profileOwner.id})}">
     <button type="submit">Edit Profile</button>
 </form>
 

@@ -46,7 +46,7 @@
         <!--Total Liabilities: <span th:text="${company.getTotalLiabilities()}"></span><br /><br />-->
         Total Sales Revenue: <span th:text="${company.getSales()}"></span></p>
 
-        <form th:action="@{/companies/{ticker}(ticker = ${company.ticker})}" method="GET">
+        <form th:action="@{/company/{ticker}(ticker = ${company.ticker})}" method="GET">
             <button>More Details</button>
         </form>
 

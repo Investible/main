@@ -23,13 +23,6 @@ public class AuthenticationController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/login")
-    public String showLoginForm(Model model) {
-        model.addAttribute("user", new User());
-        return "user/login";
-    }
-
-
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
         model.addAttribute("user", new User());
@@ -63,8 +56,29 @@ public class AuthenticationController {
         return "redirect:/login";
     }
 
+    @GetMapping("/login")
+    public String showLoginForm(Model model) {
+        model.addAttribute("user", new User());
+        return "user/login";
+    }
+
+    @GetMapping("/profile")
+    public String showProfile() {
+        User user = userSvc.loggedInUser();
+        return "redirect:/profile/" + user.getId();
+    }
+
+    @GetMapping("/profile/{id}")
+    public String profileView(@PathVariable Long id, Model model){
+        User profileOwner = users.findOne(id);
+        model.addAttribute("profileOwner", profileOwner);
+        model.addAttribute("isProfileOwner", userSvc.userLoggedInMatchesOwner(profileOwner));
+        return "user/profile";
+    }
+
     @GetMapping("/profile/{id}/edit")
     public String profileEditForm(@PathVariable long id, Model model) {
+        //who is logged in redirect them back to main page
         model.addAttribute("user", users.findOne(id));
         return "user/edit";
     }
@@ -76,7 +90,7 @@ public class AuthenticationController {
                              @RequestParam(name = "firstName") String firstName,
                              @RequestParam(name = "lastName") String lastName,
                              @RequestParam(name = "email") String email
-                             ) {
+    ) {
 
         User existingUser = users.findOne(id);
 
@@ -93,12 +107,7 @@ public class AuthenticationController {
         users.save(user);
         userSvc.authenticate(user);
 
-        return "redirect:/profile";
-    }
-
-    @GetMapping("/profile")
-    public String profileView(){
-        return "user/profile";
+        return "redirect:/profile/" + user.getId();
     }
 
 //    public String formChecklist(User user, String confirmPassword){

@@ -25,15 +25,13 @@ public class InvestibleApplication {
 
     public static void main(String[] args) {
         run(InvestibleApplication.class, args);
-
- //       seed();
+//        seed();
 
     }
 
     public static void seed(){
         HttpClient httpclient = HttpClients.createDefault();
 
-//        Testing lowercase tickers
         String[] seedTickers = {"gpro", "aapl", "qlys", "newr", "feye", "rpd", "lc", "twlo", "roku", "quot", "run", "sq"};
 
         for (String ticker : seedTickers) {
