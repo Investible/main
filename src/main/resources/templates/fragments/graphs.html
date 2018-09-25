@@ -12,9 +12,9 @@
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <p>This page lets you see the ups and down of each company.</p>
 <textarea id="searchbox"></textarea>
-<input type="button" value="Search!" onclick="doSearch()">
+<input type="button" value="Search!" onclick="addNewTicker()">
 <div id="resultsdiv"></div>
-<div id="afterbegin"></div>
+<!--<div id="afterbegin"></div>-->
 <div id="graph_charts" style="width: 100%; height: 500px;"></div>
 
 
@@ -22,6 +22,8 @@
 <script type="text/javascript">
     google.charts.load('current', {'packages':['corechart']});
     // google.charts.setOnLoadCallback(drawVisualization);
+var graphContents = [];
+
 
     function drawVisualization(output) {
         // Some raw data (grabbing from the api)
@@ -41,12 +43,12 @@
     var GRAPHS_CONTAINER = document.querySelector("#graph_charts");
 
     async function firstGraph(stockSymbol) {
-        var url = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=" + stockSymbol + "&outputsize=full&datatype=json&apikey=4LTMQQHJMWN9C79N";
+        var url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + stockSymbol + "&outputsize=compact&datatype=json&apikey=4LTMQQHJMWN9C79N";
         try {
             var response = await fetch(url);
             var data = await response.json();
             console.log(data);
-            var series = data["Monthly Time Series"];
+            var series = data["Time Series (Daily)"];
             var output = [];
 
             for (key in series) {
@@ -57,7 +59,7 @@
             }
             output.reverse();
             output.unshift(["month", data["Meta Data"]["2. Symbol"]]);
-
+            graphContents = output;
             console.log(output);
             google.charts.setOnLoadCallback(function (){
                 drawVisualization(output)
@@ -73,6 +75,35 @@
 
     });
 
+    async function addNewTicker(){
+        var stockSymbol = document.querySelector("#searchbox").value;
+        console.log(stockSymbol)
+        var url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + stockSymbol + "&outputsize=full&datatype=json&apikey=4LTMQQHJMWN9C79N";
+        try {
+            var response = await fetch(url);
+            var data = await response.json();
+            console.log(data);
+            var series = data["Time Series (Daily)"];
+            var output = [];
+
+            for (key in series) {
+                var price = series[key]["4. close"];
+                var price = parseFloat(price);
+                output.push([key, price])
+            }
+            output.reverse();
+            output.forEach(function(element){
+                graphContents.push(element);
+            });
+
+    console.log(graphContents);
+            google.charts.setOnLoadCallback(function (){
+                drawVisualization(graphContents)
+            });
+        } catch (e) {
+            console.log("Error!", e);
+        }
+    }
 </script>
 </body>
 </html>
