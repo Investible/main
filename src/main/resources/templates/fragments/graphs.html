@@ -77,12 +77,11 @@ var graphContents = [];
 
     async function addNewTicker(){
         var stockSymbol = document.querySelector("#searchbox").value;
-        console.log(stockSymbol)
-        var url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + stockSymbol + "&outputsize=full&datatype=json&apikey=4LTMQQHJMWN9C79N";
+        // console.log(stockSymbol);
+        var url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + stockSymbol + "&outputsize=compact&datatype=json&apikey=4LTMQQHJMWN9C79N";
         try {
             var response = await fetch(url);
             var data = await response.json();
-            console.log(data);
             var series = data["Time Series (Daily)"];
             var output = [];
 
@@ -92,14 +91,18 @@ var graphContents = [];
                 output.push([key, price])
             }
             output.reverse();
-            output.forEach(function(element){
-                graphContents.push(element);
-            });
+            var newSymbolData = [];
 
-    console.log(graphContents);
-            google.charts.setOnLoadCallback(function (){
-                drawVisualization(graphContents)
+            newSymbolData.push(stockSymbol);
+            output.forEach(function(price) {
+                newSymbolData.push(price[1]);
             });
+            graphContents.forEach(function(row, index) {
+                graphContents[index].push(newSymbolData[index]);
+            });
+                drawVisualization(graphContents);
+
+            console.log(graphContents);
         } catch (e) {
             console.log("Error!", e);
         }
