@@ -23,6 +23,11 @@ public class CompanyController {
         this.commentsRepo = commentsRepo;
     }
 
+    @GetMapping("/")
+    public String returnHomePage(){
+        return "redirect:/home";
+    }
+
     @GetMapping("/home")
     public String companyIndex(Model viewModel) {
         List<Company> companies = (List<Company>) companyRepo.findAll();
