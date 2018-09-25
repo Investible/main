@@ -12,14 +12,18 @@
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <p>This page lets you see the ups and down of each company.</p>
 <textarea id="searchbox"></textarea>
-<input type="button" value="Search!" onclick="doSearch()">
+<input type="button" value="Search!" onclick="addNewTicker()">
 <div id="resultsdiv"></div>
-<div id="afterbegin"></div>
+<!--<div id="afterbegin"></div>-->
+<div id="graph_charts" style="width: 100%; height: 500px;"></div>
+
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
     google.charts.load('current', {'packages':['corechart']});
     // google.charts.setOnLoadCallback(drawVisualization);
+var graphContents = [];
+
 
     function drawVisualization(output) {
         // Some raw data (grabbing from the api)
@@ -35,64 +39,74 @@
         var chart = new google.visualization.LineChart(document.getElementById('graph_charts'));
         chart.draw(data, options);
     }
-</script>
-
-<div id="graph_charts" style="width: 900px; height: 500px;"></div>
-
-<script>
 
     var GRAPHS_CONTAINER = document.querySelector("#graph_charts");
 
-    function getStockGraphData(stockSymbol){
-        fetchGraphs(stockSymbol)
-    }
-    async function fetchGraphs(stockSymbol) {
-        var url = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=" + stockSymbol + "&outputsize=full&datatype=json&apikey=4LTMQQHJMWN9C79N";
+    async function firstGraph(stockSymbol) {
+        var url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + stockSymbol + "&outputsize=compact&datatype=json&apikey=4LTMQQHJMWN9C79N";
         try {
-            var response = await fetch(url)
+            var response = await fetch(url);
             var data = await response.json();
             console.log(data);
-            var series = data["Monthly Time Series"];
+            var series = data["Time Series (Daily)"];
             var output = [];
 
             for (key in series) {
                 var price = series[key]["4. close"];
-                price = parseFloat(price)
+                var
+                price = parseFloat(price);
                 output.push([key, price])
             }
-            output.reverse()
+            output.reverse();
             output.unshift(["month", data["Meta Data"]["2. Symbol"]]);
-
-            console.log(output)
+            graphContents = output;
+            console.log(output);
             google.charts.setOnLoadCallback(function (){
                 drawVisualization(output)
             });
 
-            // return data.batch([`MSFT`, `AAPL`, `GOOGL`, `OLYS`,`FEYE`, `RPD`, `TWLO`, `W`, `ROKU`, `BOX`, `PSTG`, `GRPN`]).then(data => {
-            // });;
         } catch (e) {
             console.log("Error!", e);
         }
     }
 
-    // async function buildGraphsHTML(stockSymbol){
-    //     var graphObj = Object.entries(await fetchGraphs(stockSymbol));
-    //     var graphMetaData = graphObj[0][1];
-    //     var graphCompanySymbol = Object.values(graphMetaData)[1];
-    //     var graphTimeSeries = graphObj[1][1];
-    //     console.log(graphCompanySymbol, graphTimeSeries);
-    //     Object.entries(graphTimeSeries).forEach(
-    //         ([key,value]) => console.log(key,value)
-    //     );
-    //     // console.log(graphsHTML);
-    //     GRAPHS_CONTAINER.insertAdjacentHTML('afterbegin', graphsHTML)
-    // }
-
     document.addEventListener('DOMContentLoaded', function () {
-        // buildGraphsHTML()
-        getStockGraphData("GOOGL");
+        firstGraph("AAPL");
+
     });
 
+    async function addNewTicker(){
+        var stockSymbol = document.querySelector("#searchbox").value;
+        // console.log(stockSymbol);
+        var url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + stockSymbol + "&outputsize=compact&datatype=json&apikey=4LTMQQHJMWN9C79N";
+        try {
+            var response = await fetch(url);
+            var data = await response.json();
+            var series = data["Time Series (Daily)"];
+            var output = [];
+
+            for (key in series) {
+                var price = series[key]["4. close"];
+                var price = parseFloat(price);
+                output.push([key, price])
+            }
+            output.reverse();
+            var newSymbolData = [];
+
+            newSymbolData.push(stockSymbol);
+            output.forEach(function(price) {
+                newSymbolData.push(price[1]);
+            });
+            graphContents.forEach(function(row, index) {
+                graphContents[index].push(newSymbolData[index]);
+            });
+                drawVisualization(graphContents);
+
+            console.log(graphContents);
+        } catch (e) {
+            console.log("Error!", e);
+        }
+    }
 </script>
 </body>
 </html>
