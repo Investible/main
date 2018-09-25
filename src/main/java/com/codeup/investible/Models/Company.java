@@ -35,13 +35,13 @@ public class Company {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
     private List<Comment> comments;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name="graphs",
-            joinColumns={@JoinColumn(name="graphs")},
-            inverseJoinColumns={@JoinColumn(name="company")}
-    )
-    private List<Graphs> company;
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name="graphs",
+//            joinColumns={@JoinColumn(name="graphs")},
+//            inverseJoinColumns={@JoinColumn(name="company")}
+//    )
+//    private List<Graphs> company;
 
     public Company(){
 
