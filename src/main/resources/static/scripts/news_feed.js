@@ -5,7 +5,8 @@ function requestURL() {
         BASE_URL = "https://newsapi.org/v2/top-headlines?",
         COUNTRY_PARAM = "country=us&",
         ARTICLE_CATEGORY = "category=business&",
-        NEWSFEED_APIKEY = "apiKey=99df6baec7fb440291394e15ceb17586"
+        // NEWSFEED_APIKEY = "apiKey=99df6baec7fb440291394e15ceb17586"
+        NEWSFEED_APIKEY = "apiKey=be56e2bd456c4178ba8b9bc080a0d860"
 
     return [BASE_URL, COUNTRY_PARAM, ARTICLE_CATEGORY, NEWSFEED_APIKEY].join('')
 }
@@ -20,29 +21,53 @@ async function fetchArticles() {
     }
 }
 
-async function buildArticlesHTML(){
+async function buildArticlesHTML() {
+    console.log('buildArticlesHTML');
     var articlesArray = await fetchArticles()
-
     var articlesHTML = "";
-
-    for await(let article of articlesArray){
+    var count = 0;
+    for await(let article of articlesArray) {
+        if(article.title === null) {
+            continue;
+        }else if(article.description === null) {
+            continue;
+        }else if(article.publishedAt === null) {
+            continue;
+        }else if(article.author === null){
+            continue;
+        }else if(article.urlToImage === null) {
+            continue;
+        }
+        count ++;
+        if(count === 10){
+            break;
+        }
         articlesHTML += `
+
+
       <div class='article-container'>
+          <div class="wrapper">
+      <article>
           <h2 class='article-title'>${article.title}</h2>
           <p class='article-description'>${article.description}</p>
           <p class='article-timestamp'>${article.publishedAt}</p>
           <h3 class='article-author'>By ${article.author}</h3>
+          <div class="over-all">
+          <div class="newsfeed-img">
           <img src='${article.urlToImage}' alt='${article.title}'>
+          </div>
+          </div>
           <p class='article-content'>${article.content}</p>
+      </article>
+        </div>
       </div>
     `
     }
-
     console.log(articlesHTML)
     NEWS_FEED_CONTAINER.insertAdjacentHTML('afterbegin', articlesHTML)
 }
 
-
 document.addEventListener('DOMContentLoaded', function () {
-    buildArticlesHTML()
+
+    return buildArticlesHTML()
 });
