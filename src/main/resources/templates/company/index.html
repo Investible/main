@@ -3,56 +3,53 @@
 <head>
     <meta charset="UTF-8" />
     <title>Company Index</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
     <style>
 
         body{
-            background-color: #16425b;
+            background-color: lightblue;
         }
 
         .companyPanel{
-            width: 45%;
-            float: left;
-            display: inline;
             text-align: center;
             font-size: 1.5em;
         }
 
-        .container{
-            width: 90%;
-            margin-left: 10%;
-        }
-
-        h2, h4{
-            color: white;
-        }
     </style>
 </head>
 <body>
 
-<!--<nav th:replace="partials :: navbar" />-->
+<nav th:replace="fragments/partials :: navbar"></nav>
 
 <div class="container">
 
-<div class="companyPanel" th:each="company : ${companies}">
+    <div class="row">
+        <div class="companyPanel col-12 col-md-6 my-4" th:each="company : ${companies}">
+            <div class="card py-5">
 
-    <h2 th:text="${company.name}"></h2>
+    <h2 th:text="${company.name}" class="card-title"></h2>
 
     <h4>Company Data (Last Year):</h4>
 
-    <p>Ticker: <span th:text="${company.ticker}"></span><br /><br />
-        Net Income: <span th:text="${company.getNetIncome()}"></span><br /><br />
+    <p>Ticker: <span th:text="${company.ticker}"></span><br />
+        Net Income: <span th:text="${company.getNetIncome()}"></span><br />
         <!--Earnings Per Share: <span th:text="${company.eps}"></span><br /><br />-->
         <!--Total Assets: <span th:text="${company.getTotalAssets()}"></span><br /><br />-->
         <!--Total Liabilities: <span th:text="${company.getTotalLiabilities()}"></span><br /><br />-->
-        Total Sales Revenue: <span th:text="${company.getSales()}"></span></p>
+        Sales Revenue: <span th:text="${company.getSales()}"></span></p>
 
         <form th:action="@{/company/{ticker}(ticker = ${company.ticker})}" method="GET">
-            <button>More Details</button>
+            <button class="btn btn-dark">More Details</button>
         </form>
 
-</div>
+            </div>
+        </div>
+    </div>
 
 </div>
+
+<div th:replace="fragments/partials :: javascript"></div>
 
 </body>
 </html>
