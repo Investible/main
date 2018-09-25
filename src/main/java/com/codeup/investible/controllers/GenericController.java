@@ -7,9 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class GenericController {
 
-    @GetMapping("/**")
+    @GetMapping("/")
     public String homePage(){
         return "home";
+    }
+
+    @GetMapping("/**")
+    public String redirectHome(){
+        return "redirect:/";
     }
 
     @GetMapping("/glossary")
