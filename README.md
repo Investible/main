@@ -4,7 +4,7 @@
 
 - [X]	Users can log into their account
 
-- [ ]	Logged in users can comment on company profiles
+- [X]	Logged in users can comment on company profiles
 
 - [ ]	Logged in users can edit their own comments
 
@@ -16,7 +16,6 @@
 
 - [X]	Users will be able to see other user’s comments on a companies’ page
 
-- [ ]	There will be an index of all recent comments (Likely the home page)
 
 
 This feature list is expected to require these database tables:
