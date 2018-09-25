@@ -84,7 +84,7 @@
     <div class="alert alert-info" th:if="${isDisabled}"><i class="fas fa-lock margin-right-lite"></i>This post is currently locked.</div>
     <!--<div th:if="${!isDisabled} and (${isLoggedIn} and ${!isBanned})" class="commentFormWrapper margin-left-right">-->
         <!--sec:authorize="isAuthenticated()"-->
-        <form action="#" th:action="@{/company/{id}/comments(id= ${company.id})}" method="post" th:object="${comment}" class="commentForm">
+        <form th:action="@{/company/{id}/comments(id= ${company.id})}" method="post" th:object="${comment}" class="commentForm">
             <div class="form-group">
                 <label for="commentFormBody"></label>
                 <textarea class="form-control" id="commentFormBody" name="body"

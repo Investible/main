@@ -40,7 +40,7 @@ import java.util.Date;
             comment.setCompany(company);
             comment.setUser(user);
             commentRepository.save(comment);
-            return "redirect:/company/${ticker}";
+            return "redirect:/company/" + company.getTicker();
         }
 
         @GetMapping("/posts/{id}/edit")
