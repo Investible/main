@@ -15,6 +15,8 @@
 <input type="button" value="Search!" onclick="doSearch()">
 <div id="resultsdiv"></div>
 <div id="afterbegin"></div>
+<div id="graph_charts" style="width: 100%; height: 500px;"></div>
+
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -35,21 +37,13 @@
         var chart = new google.visualization.LineChart(document.getElementById('graph_charts'));
         chart.draw(data, options);
     }
-</script>
-
-<div id="graph_charts" style="width: 900px; height: 500px;"></div>
-
-<script>
 
     var GRAPHS_CONTAINER = document.querySelector("#graph_charts");
 
-    function getStockGraphData(stockSymbol){
-        fetchGraphs(stockSymbol)
-    }
-    async function fetchGraphs(stockSymbol) {
+    async function firstGraph(stockSymbol) {
         var url = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=" + stockSymbol + "&outputsize=full&datatype=json&apikey=4LTMQQHJMWN9C79N";
         try {
-            var response = await fetch(url)
+            var response = await fetch(url);
             var data = await response.json();
             console.log(data);
             var series = data["Monthly Time Series"];
@@ -57,40 +51,26 @@
 
             for (key in series) {
                 var price = series[key]["4. close"];
-                price = parseFloat(price)
+                var
+                price = parseFloat(price);
                 output.push([key, price])
             }
-            output.reverse()
+            output.reverse();
             output.unshift(["month", data["Meta Data"]["2. Symbol"]]);
 
-            console.log(output)
+            console.log(output);
             google.charts.setOnLoadCallback(function (){
                 drawVisualization(output)
             });
 
-            // return data.batch([`MSFT`, `AAPL`, `GOOGL`, `OLYS`,`FEYE`, `RPD`, `TWLO`, `W`, `ROKU`, `BOX`, `PSTG`, `GRPN`]).then(data => {
-            // });;
         } catch (e) {
             console.log("Error!", e);
         }
     }
 
-    // async function buildGraphsHTML(stockSymbol){
-    //     var graphObj = Object.entries(await fetchGraphs(stockSymbol));
-    //     var graphMetaData = graphObj[0][1];
-    //     var graphCompanySymbol = Object.values(graphMetaData)[1];
-    //     var graphTimeSeries = graphObj[1][1];
-    //     console.log(graphCompanySymbol, graphTimeSeries);
-    //     Object.entries(graphTimeSeries).forEach(
-    //         ([key,value]) => console.log(key,value)
-    //     );
-    //     // console.log(graphsHTML);
-    //     GRAPHS_CONTAINER.insertAdjacentHTML('afterbegin', graphsHTML)
-    // }
-
     document.addEventListener('DOMContentLoaded', function () {
-        // buildGraphsHTML()
-        getStockGraphData("GOOGL");
+        firstGraph("AAPL");
+
     });
 
 </script>
