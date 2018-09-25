@@ -12,11 +12,6 @@ public class GenericController {
         return "home";
     }
 
-    @GetMapping("/**")
-    public String redirectHome(){
-        return "redirect:/";
-    }
-
     @GetMapping("/glossary")
     public String glossary(){
         return "glossary";
