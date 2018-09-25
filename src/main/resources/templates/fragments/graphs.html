@@ -29,9 +29,9 @@ var graphContents = [];
         // Some raw data (grabbing from the api)
         var data = google.visualization.arrayToDataTable(output);
         var options = {
-            title : 'Monthly Investment Production by Company',
+            title : 'Daily Investment Production by Company',
             vAxis: {title: 'Stock'},
-            hAxis: {title: 'Monthly'},
+            hAxis: {title: 'Daily'},
             seriesType: 'line',
             series: {12: {type: 'line'}}
         };
