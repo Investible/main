@@ -37,17 +37,7 @@
                     <a class="nav-link" th:href="@{/about-us}">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/companies}">Company List</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" th:href="@{/companies}" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Companies
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <span th:each="company : ${companies}">
-                            <a class="dropdown-item" th:href="@{'/company/' + ${company.id}}" th:text="${company.name}"></a>
-                        </span>
-                    </div>
+                    <a class="nav-link" th:href="@{/companies}">Companies</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav ml-auto">
@@ -69,18 +59,6 @@
         </div>
     </nav>
 
-
-    <!--============JUMBOTRON========-->
-
-    <div class="jumbotron">
-        <h1>Hello, world!</h1>
-        <p>...</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-    </div>
-
-
-
-    <!--===================Comment========================-->
 
     <th:block th:fragment="comment">
 
@@ -139,18 +117,7 @@
             <!-- Grid row-->
             <hr class="rgba-white-light" style="margin: 0 15%;" />
 
-            <!-- Grid row-->
-            <div class="row d-flex text-center justify-content-center mb-md-0 mb-4">
 
-                <!-- Grid column -->
-                <div class="col-md-8 col-12 mt-5">
-                    <p style="line-height: 1.7rem">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-                        aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.</p>
-                </div>
-                <!-- Grid column -->
-
-            </div>
             <!-- Grid row-->
             <hr class="clearfix d-md-none rgba-white-light" style="margin: 10% 15% 5%;" />
 
