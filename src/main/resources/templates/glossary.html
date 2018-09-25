@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Glossary</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+    <style>
+
+        body{
+            background-color: lightblue;
+        }
+
+    </style>
+</head>
+<body>
+
+<nav th:replace="fragments/partials :: navbar"></nav>
+
+<div class="container">
+
+    <h2 class="my-5">Glossary</h2>
+
+    <p class="my-5 text-center">Here we've assembled a list of terms that may be helpful for using our site.</p>
+
+    <section class="card text-center">
+
+        <h4 class="card-title">This will be the first term, once we decide on a list of terms.</h4>
+
+    </section>
+
+
+</div>
+
+<div th:replace="fragments/partials :: javascript"></div>
+
+</body>
+</html>

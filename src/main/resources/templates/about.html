@@ -1,37 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <titl>About Us</titl></title>
+    <meta charset="UTF-8" />
+    <title>About Us</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+
+    <style>
+
+        body{
+            background-color: lightblue;
+        }
+
+        img{
+            width: 100%;
+            height: 250px;
+        }
+
+        .card{
+            background-color: inherit;
+            text-align: center;
+            border: none;
+        }
+
+    </style>
 </head>
 <body>
 
-<div class="container text-center">
-    <h3>Investible/Active</h3>
-    <p><em>Learn the in's and out's about investments</em></p>
-    <p>We have created a functional investment website.</p>
-    <br>
-    <p><em>Meet The Team!!</em></p>
+<nav th:replace="fragments/partials :: navbar"></nav>
+
+<div class="container">
+    <h1 class="my-5">Investor/Active</h1>
+    <h3 class="my-5 text-center">Meet The Team!</h3>
     <div class="row">
-        <div class="col-sm-4">
-            <p><strong>Max Denny</strong></p><br>
-            <img src="Image/maxdenny6.jpg" alt="Max">
+        <div class="col-12 col-sm-6 col-md-3 card">
+            <h2 class="card-title">Max Denny</h2>
+            <img src="img/maxdenny6.jpg" alt="Max" />
             <a href="https://www.linkedin.com/in/max-denny/"></a>
+            <p class="card-text">Flavor Text</p>
         </div>
-        <div class="col-sm-4">
-            <p><strong>Collier Bluff</strong></p><br>
-            <img src="Image/collier.jpeg" alt="Collier">
+        <div class="col-12 col-sm-6 col-md-3 card">
+            <h2 class="card-title">Collier Bluff</h2>
+            <img src="img/collier.jpeg" alt="Collier" />
             <a href="https://www.linkedin.com/in/collier-bluff/"></a>
+            <p class="card-text">Flavor Text</p>
         </div>
-        <div class="col-sm-4">
-            <p><strong>LaMar Lofton</strong></p><br>
-            <img src="Image/IMG_1096.jpg" alt="La Mar">
+        <div class="col-12 col-sm-6 col-md-3 card">
+            <h2 class="card-title">LaMar Lofton</h2>
+            <img src="img/IMG_1096.jpg" alt="LaMar" />
             <a href="https://www.linkedin.com/in/lamar-lofton/"></a>
+            <p class="card-text">Flavor Text</p>
         </div>
-        <div class="col-sm-4">
-            <p><strong>Don Pho</strong></p><br>
-            <img src="Image/don_s_headshot.jpeg" alt="Don">
+        <div class="col-12 col-sm-6 col-md-3 card">
+            <h2 class="card-title">Don Pho</h2>
+            <img src="img/don_s_headshot.jpeg" alt="Don" />
             <a href="https://www.linkedin.com/in/donpho/"></a>
+            <p class="card-text">Flavor Text</p>
         </div>
     </div>
 </div>

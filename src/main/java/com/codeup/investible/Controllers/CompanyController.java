@@ -18,11 +18,6 @@ public class CompanyController {
         this.companyRepo = companyRepo;
     }
 
-    @GetMapping("/")
-    public String homePage(){
-        return "home";
-    }
-
     @GetMapping("/companies")
     public String companyIndex(Model viewModel) {
 
