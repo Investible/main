@@ -22,7 +22,7 @@ public class CompanyController {
     public String companyIndex(Model viewModel) {
 
         viewModel.addAttribute("companies", companyRepo.findAll());
-        return "company/index";
+        return "company/companies";
     }
 
 //    @GetMapping("/companies/{id}")
