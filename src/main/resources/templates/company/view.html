@@ -45,15 +45,31 @@
 
 <div class="container">
 
+    <!--<p hidden id="tickr">run</p>-->
+
     <h2 th:text="${company.name}"></h2>
 
     <h4>Company Data (This Year): </h4>
-    <p>Ticker: <span th:text="${company.ticker}"></span><br /><br />
+    <p>Ticker: <span id="ticker" th:text="${company.ticker}"></span><br /><br />
     Net Income: <span th:text="${company.getNetIncome()}"></span><br /><br />
     Earnings Per Share: <span th:text="${company.eps}"></span><br /><br />
     Total Assets: <span th:text="${company.getTotalAssets()}"></span><br /><br />
     Total Liabilities: <span th:text="${company.getTotalLiabilities()}"></span><br /><br />
     Total Sales Revenue: <span th:text="${company.getSales()}"></span></p>
+
+
+    <div class="graphs">
+        <p>This page lets you see the ups and down of each company.</p>
+        <textarea id="searchbox"></textarea>
+        <input type="button" value="Search!" onclick="addNewTicker()" />
+        <div id="resultsdiv"></div>
+        <!--<div id="afterbegin"></div>-->
+        <div id="graph_charts" class="container" style="width: 100%; height: 500px;"></div>
+    </div>
+
+
+
+
     Comments:
     <div th:replace="fragments/partials :: comment-form"></div>
     <div th:each="comment : ${comments}">
@@ -77,5 +93,9 @@
 
 </div>
 
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="/scripts/graphs.js">
+</script>
 </body>
 </html>
