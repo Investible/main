@@ -8,18 +8,22 @@
     <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet">
 </head>
 <body>
+
+<p hidden id="tickr">RUN</p>
+
 <h1>Graphing for Investment</h1>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <p>This page lets you see the ups and down of each company.</p>
 <textarea id="searchbox"></textarea>
-<input type="button" value="Search!" onclick="addNewTicker()">
+<input type="button" value="Search!" onclick="addNewTicker()" />
 <div id="resultsdiv"></div>
 <!--<div id="afterbegin"></div>-->
-<div id="graph_charts" style="width: 100%; height: 500px;"></div>
+<div id="graph_charts" class="container" style="width: 100%; height: 500px;"></div>
 
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+    var currentCompanyTicker = document.getElementById('tickr');
     google.charts.load('current', {'packages':['corechart']});
     // google.charts.setOnLoadCallback(drawVisualization);
 var graphContents = [];
@@ -71,7 +75,7 @@ var graphContents = [];
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        firstGraph("AAPL");
+        firstGraph(currentCompanyTicker.innerHTML);
 
     });
 
