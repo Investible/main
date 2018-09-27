@@ -21,11 +21,9 @@ import java.util.Date;
 
     private final CommentRepository commentRepository;
         private final CompanyRepository companyRepo;
-        private UserRepository userRepository;
 
         public CommentController(CommentRepository commentRepository, CompanyRepository companyRepo, UserRepository userRepository) {
             this.commentRepository = commentRepository;
-            this.userRepository = userRepository;
             this.companyRepo = companyRepo;
         }
 
@@ -43,35 +41,12 @@ import java.util.Date;
             return "redirect:/company/" + company.getTicker();
         }
 
-        @GetMapping("/posts/{id}/edit")
-        public String postEditForm(@PathVariable long id, Model model) {
-            model.addAttribute("post", commentRepository.findOne(id));
-            return "posts/edit";
-        }
-
-//        @PostMapping("/posts/{id}/edit")
-//        public String updatePost(@ModelAttribute Comment comment) {
-//            CommentRepository.save(comment);
-//            return "redirect:/posts";
-//        }
-
-        @PostMapping("/posts/delete")
-        public String deletePost(@RequestParam(name = "id") long id){
+        @GetMapping("/comment/{id}/{ticker}")
+        public String deleteComment(@PathVariable long id, @PathVariable String ticker){
             commentRepository.delete(id);
-            return "redirect:/posts";
+            return "redirect:/company/" + ticker;
         }
 
-        @GetMapping("/find-user/{query}")
-        @ResponseBody
-        public String findUser(@PathVariable String query){
-
-            User user = userRepository.findByUsername(query);
-
-            System.out.println("user.getEmail() = " + user.getEmail());
-
-            return "testing find by username";
-
-        }
 
     }
 
