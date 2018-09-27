@@ -13,5 +13,8 @@ public interface CommentRepository extends CrudRepository<Comment, Long> {
     @Query(nativeQuery = true, value = "SELECT * from comments WHERE company_id LIKE ?1")
     List<Comment> findByCompanyId(Long id);
 
+    @Query(nativeQuery = true, value ="SELECT * FROM comments WHERE user_id LIKE ?1")
+    List<Comment> findByUserId(Long id);
+
 }
 
