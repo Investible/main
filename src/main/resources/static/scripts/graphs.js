@@ -63,13 +63,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-function addNewTicker(){
+async function addNewTicker(){
     var stockSymbol = document.querySelector("#searchbox").value.toUpperCase();
-    // console.log(stockSymbol);
+    console.log(stockSymbol);
     var url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + stockSymbol + "&outputsize=compact&datatype=json&apikey=4LTMQQHJMWN9C79N";
     try {
-        var response =  fetch(url);
-        var data =  response.json();
+        var response = await fetch(url);
+        var data = await response.json();
         var series = data["Time Series (Daily)"];
         var output = [];
 
