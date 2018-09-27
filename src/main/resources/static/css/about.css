@@ -1,8 +1,8 @@
-* {
-    margin: 0;
-    padding: 0;
-    font-family: SansSerif;
-}
+/** {*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*font-family: SansSerif;*/
+/*}*/
 
 
 body{
@@ -66,6 +66,10 @@ img{
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.card row{
+    text-align: center;
+}
+
 
 img:hover {
     filter: none;
@@ -126,9 +130,11 @@ p{
 
 ul {
     list-style: none;
+    text-align: center;
 }
 li {
     display: inline;
+    text-align: center;
 }
 
 .card-text1{
