@@ -56,14 +56,26 @@ img{
 }
 
 
+/*old way*/
+/*.card {*/
+    /*background-color: inherit;*/
+    /*text-align: center;*/
+    /*border: 1px solid #f1f1f1;*/
+    /*padding: inherit;*/
+    /*width: 250px;*/
+    /*box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+/*}*/
 
-.card {
-    background-color: inherit;
-    text-align: center;
-    border: 1px solid #f1f1f1;
-    padding: inherit;
-    width: 250px;
-    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+.about-card {
+background-color: inherit;
+text-align: center;
+/*border: 1px solid #f1f1f1;*/
+width: 100%;
+box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+display: flex;
+align-items: center;
+justify-content: center;
 }
 
 .card row{
@@ -117,8 +129,8 @@ p{
 }
 
 .icon{
-    width: 25px;
-    height: 40px;
+    width: 35px;
+    height: 60px;
     float: left;
     filter: none;
     margin-bottom: 5px;
@@ -144,4 +156,29 @@ li {
 #1{
     text-align: center;
     overflow-scrolling: auto;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row {
+    text-align: justify;
+}
+.row > div {
+    /*width: 100px; !* Declare your value. Can be in relative units. *!*/
+    /*height: 10px;*/
+    /*display: inline-block;*/
+    vertical-align: top;
+    border: 1px black solid;
+     /*!*IE fix. *!*/
+    *display: inline;
+    zoom: 1;
+}
+.row:after {
+    content: "";
+    width: 100%;
+    display: inline-block;
 }
