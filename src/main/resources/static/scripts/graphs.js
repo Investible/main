@@ -1,6 +1,4 @@
 let currentCompanyTicker = document.getElementById('ticker');
-
-console.log("hello")
 console.log(currentCompanyTicker.innerHTML);
 
 
