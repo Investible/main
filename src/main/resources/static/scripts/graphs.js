@@ -1,9 +1,5 @@
 let currentCompanyTicker = document.getElementById('ticker');
 
-console.log("hello")
-console.log(currentCompanyTicker.innerHTML);
-
-
 google.charts.load('current', {'packages':['corechart']});
 // google.charts.setOnLoadCallback(drawVisualization);
 var graphContents = [];
@@ -25,6 +21,7 @@ function drawVisualization(output) {
     var chart = new google.visualization.LineChart(document.getElementById('graph_charts'));
     chart.draw(data, options);
 }
+
 
 var GRAPHS_CONTAINER = document.querySelector("#graph_charts");
 
@@ -60,7 +57,6 @@ document.addEventListener('DOMContentLoaded', function () {
     firstGraph(currentCompanyTicker.innerHTML.toUpperCase());
 
 });
-
 
 
 async function addNewTicker(){

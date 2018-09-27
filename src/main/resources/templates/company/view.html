@@ -26,21 +26,26 @@
         }
         h2{
             font-size: 3em;
-            margin-bottom: 2em;
         }
 
         h4{
             font-size: 2em;
         }
 
-        span{
+        p>span{
             float:right;
             margin-right: 1em;
         }
 
-        .commentSubmitBtn{
+        .btnPos{
             position: relative;
-            left: 75%;
+            left: 80%;
+        }
+
+        #ticker{
+            font-size: 1.5em;
+            margin-top: .5em;
+            margin-bottom: 2em;
         }
 
     </style>
@@ -53,26 +58,24 @@
 
 
     <h2 class="mt-5" th:text="${company.name}"></h2>
+    <span class="mb-5" id="ticker" th:text="${company.ticker}"></span>
 
-    <h4 class="mb-5">Company Data (This Year): </h4>
-    <p>Ticker: <span id="ticker" th:text="${company.ticker}"></span><br /><br />
+    <h4 class="my-5">Company Data (This Year): </h4>
 
-    <!--<p hidden id="tickr">run</p>-->
+    <div class="graphs">
+        <div id="resultsdiv"></div>
+        <div id="graph_charts" class="container" style="width: 100%; height: 500px;"></div>
+        <h4 class="my-4">Enter Another Company's Ticker To Compare Their Stock Prices:</h4>
+        <textarea class="form-control" id="searchbox" placeholder="Search"></textarea>
+        <input class="btn btnPos btn-primary my-3" type="button" value="Compare" onclick="addNewTicker()" />
+    </div>
 
+<p class="mb-5">
     Net Income: <span th:text="${company.getNetIncome()}"></span><br /><br />
     Earnings Per Share: <span th:text="${company.eps}"></span><br /><br />
     Total Assets: <span th:text="${company.getTotalAssets()}"></span><br /><br />
     Total Liabilities: <span th:text="${company.getTotalLiabilities()}"></span><br /><br />
     Total Sales Revenue: <span th:text="${company.getSales()}"></span></p>
-  
-    <div class="graphs">
-        <p>This page lets you see the ups and down of each company.</p>
-        <textarea id="searchbox"></textarea>
-        <input type="button" value="Search!" onclick="addNewTicker()" />
-        <div id="resultsdiv"></div>
-        <!--<div id="afterbegin"></div>-->
-        <div id="graph_charts" class="container" style="width: 100%; height: 500px;"></div>
-    </div>
   
   <h3 class="my-5 text-center">Comments:</h3>
 
