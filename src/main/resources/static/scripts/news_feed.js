@@ -15,8 +15,6 @@ async function fetchArticles() {
     try {
         var response = await fetch(requestURL());
         var data = await response.json();
-        console.log(data);
-        console.log(data.articles[0]);
         return data.articles;
     } catch (e) {
         console.log("Error!", e);
@@ -40,21 +38,19 @@ async function buildArticlesHTML() {
             continue;
         }
         count ++;
-        if(count === 10){
+        if(count === 11){
             break;
         }
         articlesHTML += `
 
-      <div class='article-container'>
-      <article>
-          <a href="${article.url}"><h2 class='article-title'>${article.title}</h2></a>
+      <div class='article-container mb-2'>
+      <article class="card">
+          <a href="${article.url}" target="_blank"><h2 class='article-title'>${article.title}</h2>
           <p class='article-description'>${article.description}</p>
-          <div class="over-all">
           <div class="newsfeed-img">
           <img src='${article.urlToImage}' alt='${article.title}'>
           </div>
-          </div>
-          <p class='article-content'>${article.content}</p>
+          </a>
       </article>
       </div>
     `
