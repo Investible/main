@@ -25,7 +25,9 @@ public class InvestibleApplication {
 
     public static void main(String[] args) {
         run(InvestibleApplication.class, args);
-//        seed();
+
+        seed();
+
 
     }
 
@@ -116,4 +118,4 @@ public class InvestibleApplication {
 
         }
     }
-  }
+}
