@@ -6,15 +6,17 @@ function requestURL() {
         COUNTRY_PARAM = "country=us&",
         ARTICLE_CATEGORY = "category=business&",
         // NEWSFEED_APIKEY = "apiKey=99df6baec7fb440291394e15ceb17586"
-        NEWSFEED_APIKEY = "apiKey=be56e2bd456c4178ba8b9bc080a0d860"
+        NEWSFEED_APIKEY = "apiKey=be56e2bd456c4178ba8b9bc080a0d860";
 
     return [BASE_URL, COUNTRY_PARAM, ARTICLE_CATEGORY, NEWSFEED_APIKEY].join('')
 }
 
 async function fetchArticles() {
     try {
-        var response = await fetch(requestURL())
+        var response = await fetch(requestURL());
         var data = await response.json();
+        console.log(data);
+        console.log(data.articles[0]);
         return data.articles;
     } catch (e) {
         console.log("Error!", e);
@@ -22,8 +24,7 @@ async function fetchArticles() {
 }
 
 async function buildArticlesHTML() {
-    console.log('buildArticlesHTML');
-    var articlesArray = await fetchArticles()
+    var articlesArray = await fetchArticles();
     var articlesHTML = "";
     var count = 0;
     for await(let article of articlesArray) {
@@ -44,14 +45,10 @@ async function buildArticlesHTML() {
         }
         articlesHTML += `
 
-
       <div class='article-container'>
-          <div class="wrapper">
       <article>
-          <h2 class='article-title'>${article.title}</h2>
+          <a href="${article.url}"><h2 class='article-title'>${article.title}</h2></a>
           <p class='article-description'>${article.description}</p>
-          <p class='article-timestamp'>${article.publishedAt}</p>
-          <h3 class='article-author'>By ${article.author}</h3>
           <div class="over-all">
           <div class="newsfeed-img">
           <img src='${article.urlToImage}' alt='${article.title}'>
@@ -59,11 +56,9 @@ async function buildArticlesHTML() {
           </div>
           <p class='article-content'>${article.content}</p>
       </article>
-        </div>
       </div>
     `
     }
-    console.log(articlesHTML)
     NEWS_FEED_CONTAINER.insertAdjacentHTML('afterbegin', articlesHTML)
 }
 
