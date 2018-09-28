@@ -5,91 +5,50 @@
 
     <title>Investor/Active</title>
 
-
-    <!-- include stylesheets, etc here -->
-
     <div th:replace="fragments/partials :: bootstrapCSS"></div>
     <style>
         p{
             font-size: 2em;
         }
-
         .article-container img{
-
-            height: 500px;
-            width: auto;
-
             max-height: 400px;
             max-width: 500px;
-
         }
-
         .article-container{
             padding: 0;
             margin:0;
             font-size: .5em;
         }
-
-        body{
-            background-color: lightblue;
-        }
-
         #news-feed{
             height: 600px;
             width: 95%;
             overflow: scroll;
         }
-
         a:link, a:visited{
             color: black;
         }
-
         body{
             background-color: darkgrey;
         }
-
-
         @media only screen and (min-width: 960px) {
-
             .market-widget {
                 position: relative;
                 top: 80px;
             }
         }
-
-
     </style>
 </head>
 <body>
 <nav th:replace="fragments/partials :: navbar"></nav>
 
-    <div class="jumbotron jumbotron-fluid mb-5">
-       <div class="header-box">
-           <h1>Investor/Active</h1>
-           <h3>We make it easier to stay informed.</h3>
-           <div>
-               <!--<form th:action="@{/about-us}">-->
-                   <!--<button type="button" class="btn btn-primary">LEARN MORE</button>-->
-               <!--</form>-->
-           </div>
+<div class="jumbotron jumbotron-fluid mb-5">
+    <div class="header-box">
+        <h1>Investor/Active</h1>
+        <h3>We make it easier to stay informed.</h3>
 
-
-
-       </div>
     </div>
+</div>
 
-
-
-
-<div class="container mt-3 homepage-info">
-
-
-
-    <div class="row">
-
-        <div class="col-10 offset-1 my-5">
-            <p>
-                Welcome to Investor/Active! We are your go to destination for the latest company information. We use data from companies' most recent 10k reports to make sure you can make wise investments.
 
 
 <div class="container-fluid mt-3 homepage-info">
@@ -101,24 +60,8 @@
         <div class=" col-12 my-5">
             <p class="text-center">
                 Welcome to Investor/Active!<br /><br /> We are your go to destination for the latest company information. We use data from companies' most recent 10k reports to make sure you can make wise investments.
-
             </p>
         </div>
-
-
-    <div class="tradingview-widget-container-1 col-12"></div>
-
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js"></script>
-
-
-
-    <!--<div class="row centered my-5">-->
-        <!--<div class="col-12">-->
-            <!--<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">-->
-                <!--News Feed-->
-            <!--</a>-->
-        <!--</div>-->
-
 
     </div>
 
@@ -126,9 +69,9 @@
 
         <div class="col-10 offset-1 offset-lg-0 col-lg-7">
             <h3 class="my-5 text-center">Recent Business News</h3>
-        <div id="news-feed" class="mb-5">
-            <div id="news_data"></div>
-        </div>
+            <div id="news-feed" class="mb-5">
+                <div id="news_data"></div>
+            </div>
         </div>
 
         <div class="col-6 offset-3 offset-lg-0 col-lg-5 my-5 market-widget">
@@ -136,87 +79,11 @@
         </div>
 
 
-        <!--<div class="tradingview-widget-container__widget"></div>-->
-            <!--<div class="tradingview-widget-copyright"><a href="https://www.tradingview.com" rel="noopener" target="_blank"><span class="blue-text">Quotes</span></a> by TradingView</div>-->
-
-
-            <!--<script>-->
-                <!--{-->
-                    <!--"symbols" [-->
-                        <!--{-->
-                            <!--"description": "",-->
-                            <!--"proName": "NASDAQ:MSFT"-->
-                        <!--},-->
-                            <!--{-->
-                                <!--"description": "",-->
-                                <!--"proName": "NASDAQ:AAPL"-->
-                            <!--},-->
-                            <!--{-->
-                                <!--"description": "",-->
-                                <!--"proName": "NASDAQ:GOOGL"-->
-                            <!--},-->
-                            <!--{-->
-                                <!--"description": "",-->
-                                <!--"proName": "OTC:OCPNY"-->
-                            <!--},-->
-                            <!--{-->
-                                <!--"description": "",-->
-                                <!--"proName": "NASDAQ:FEYE"-->
-                            <!--},-->
-                            <!--{-->
-                                <!--"description": "",-->
-                                <!--"proName": "NASDAQ:RPD"-->
-                            <!--},-->
-                            <!--{-->
-                                <!--"description": "",-->
-                                <!--"proName": "NYSE:TWLO"-->
-                            <!--},-->
-                            <!--{-->
-                                <!--"description": "",-->
-                                <!--"proName": "NYSE:W"-->
-                            <!--},-->
-                            <!--{-->
-                                <!--"description": "",-->
-                                <!--"proName": "NASDAQ:ROKU"-->
-                            <!--},-->
-                            <!--{-->
-                                <!--"description": "",-->
-                                <!--"proName": "NYSE:BOX"-->
-                            <!--},-->
-                            <!--{-->
-                                <!--"description": "",-->
-                                <!--"proName": "NYSE:PSTG"-->
-                            <!--}-->
-                        <!--],-->
-                        <!--"locale": "en"-->
-                <!--}-->
-            <!--</script>-->
-        <!-- TradingView Widget END -->
-
-
-        <!--<div class="collapse" id="collapseExample">-->
-            <!--<div class="card card-body">-->
-                <!--<div id="news_data"></div>-->
-            <!--</div>-->
-        <!--</div>-->
-
-    <div class="row">
-        <div class="col-12 col-md-6">
-            <div id="news_data"></div>
-        </div>
-        <div class="col-12 col-md-6">
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js"></script>
-        </div>
-
     </div>
 </div>
 
 
-
-<!--<footer th:replace="fragments/partials :: footer"></footer>-->
-
 <footer th:replace="fragments/partials :: footer"></footer>
-
 
 <script src="/scripts/news_feed.js"></script>
 <div th:replace="fragments/partials :: javascript"></div>

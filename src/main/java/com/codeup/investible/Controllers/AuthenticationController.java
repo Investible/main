@@ -1,7 +1,9 @@
 package com.codeup.investible.controllers;
 
 import com.codeup.investible.Models.User;
+import com.codeup.investible.Repository.CommentRepository;
 import com.codeup.investible.Repository.UserRepository;
+import com.codeup.investible.Services.CommentService;
 import com.codeup.investible.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,12 +17,14 @@ public class AuthenticationController {
     private UserRepository users;
     private UserService userSvc;
     private PasswordEncoder passwordEncoder;
+    private CommentRepository commentRepository;
 
     @Autowired
-    public AuthenticationController(UserRepository users, UserService userSvc, PasswordEncoder passwordEncoder) {
+    public AuthenticationController(UserRepository users, UserService userSvc, PasswordEncoder passwordEncoder, CommentRepository commentRepository) {
         this.users = users;
         this.userSvc = userSvc;
         this.passwordEncoder = passwordEncoder;
+        this.commentRepository = commentRepository;
     }
 
     @GetMapping("/register")
@@ -73,6 +77,7 @@ public class AuthenticationController {
         User profileOwner = users.findOne(id);
         model.addAttribute("profileOwner", profileOwner);
         model.addAttribute("isProfileOwner", userSvc.userLoggedInMatchesOwner(profileOwner));
+        model.addAttribute("userComments", commentRepository.findByUserId(id));
         return "user/profile";
     }
 
@@ -109,29 +114,6 @@ public class AuthenticationController {
 
         return "redirect:/profile/" + user.getId();
     }
-
-//    public String formChecklist(User user, String confirmPassword){
-//        if(users.findByUsername(user.getUsername()) != null){
-//            return "redirect:/register?username";
-//        }
-//        if(users.findByEmail(user.getEmail()) != null){
-//            return "redirect:/register?email";
-//        }
-//        if(     !user.getUsername().matches("[a-zA-Z0-9]+") ||
-//                !user.getPassword().matches("[a-zA-Z0-9]+") ||
-//                !user.getFirstName().matches("[a-zA-Z0-9]+") ||
-//                !user.getLastName().matches("[a-zA-Z0-9]+")
-//                ){
-//            return "redirect:/register?char";
-//        }
-//        if(!confirmPassword.equals(user.getPassword())){
-//            return "redirect:/register?mismatch";
-//        }
-//        if(user.getUsername().equals(user.getPassword())){
-//            return "redirect:/register?userpass";
-//        }
-//    }
-
 
 }
 
