@@ -9,14 +9,12 @@ function requestURL() {
         NEWSFEED_APIKEY = "apiKey=be56e2bd456c4178ba8b9bc080a0d860";
 
     return [BASE_URL, COUNTRY_PARAM, ARTICLE_CATEGORY, NEWSFEED_APIKEY].join('')
-
+}
 
 async function fetchArticles() {
     try {
         var response = await fetch(requestURL());
         var data = await response.json();
-        console.log(data);
-        console.log(data.articles[0]);
         return data.articles;
     } catch (e) {
         console.log("Error!", e);
@@ -44,19 +42,10 @@ async function buildArticlesHTML() {
             break;
         }
         articlesHTML += `
-
-
-      <div class='article-container'>
-      <article>
-          <a href="${article.url}"><h2 class='article-title'>${article.title}</h2></a>
-          <p class='article-description'>${article.description}</p>
-          <div class="over-all">
-
       <div class='article-container mb-2'>
       <article class="card">
           <a href="${article.url}" target="_blank"><h2 class='article-title'>${article.title}</h2>
           <p class='article-description'>${article.description}</p>
-
           <div class="newsfeed-img">
           <img src='${article.urlToImage}' alt='${article.title}'>
           </div>
