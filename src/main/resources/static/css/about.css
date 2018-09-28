@@ -1,13 +1,14 @@
-/** {*/
-    /*margin: 0;*/
-    /*padding: 0;*/
-    /*font-family: SansSerif;*/
-/*}*/
+* {
+    margin: 0;
+    padding: 0;
+    font-family: SansSerif;
+}
 
 
 body{
     background-image: url("stockmarket.jpg");
     background-size: 100%;
+
     /*min-height: 100%;*/
     /*min-width: 1024px;*/
 
@@ -76,6 +77,7 @@ box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 display: flex;
 align-items: center;
 justify-content: center;
+
 }
 
 .card row{
