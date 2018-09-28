@@ -28,7 +28,6 @@ public class InvestibleApplication {
 
 //        seed();
 
-
     }
 
     public static void seed(){
