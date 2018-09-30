@@ -43,7 +43,7 @@ async function buildArticlesHTML() {
         }
         articlesHTML += `
       <div class='article-container'>
-      <article class="card">
+      <article class="card p-3">
           <a href="${article.url}" target="_blank"><h3 class='article-title'>${article.title}</h3><br />
           <p class='article-description'>${article.description}</p><br />
           <div class="newsfeed-img">
