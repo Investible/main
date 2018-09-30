@@ -25,18 +25,6 @@ public class CompanyController {
         return "company/companies";
     }
 
-//    @GetMapping("/companies/{id}")
-//    public String index(@PathVariable long id, Model viewModel) {
-//        Company company = companyRepo.findOne(id);
-//        List<Comment> comments = company.getComments();
-//        viewModel.addAttribute("company", company);
-//        viewModel.addAttribute("comments", comments);
-//        System.out.println(comments);
-//        Comment comment = new Comment();
-//        viewModel.addAttribute("comment", comment);
-//        return "company/view";
-//    }
-
     @GetMapping("/company/{ticker}")
     public String show(@PathVariable String ticker, Model viewModel) {
 
