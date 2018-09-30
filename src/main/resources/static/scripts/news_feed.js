@@ -42,10 +42,10 @@ async function buildArticlesHTML() {
             break;
         }
         articlesHTML += `
-      <div class='article-container mb-2'>
+      <div class='article-container'>
       <article class="card">
-          <a href="${article.url}" target="_blank"><h2 class='article-title'>${article.title}</h2>
-          <p class='article-description'>${article.description}</p>
+          <a href="${article.url}" target="_blank"><h3 class='article-title'>${article.title}</h3><br />
+          <p class='article-description'>${article.description}</p><br />
           <div class="newsfeed-img">
           <img src='${article.urlToImage}' alt='${article.title}'>
           </div>
