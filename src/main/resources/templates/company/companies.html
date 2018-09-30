@@ -42,11 +42,11 @@
             <h4>Company Data (Last Year):</h4>
 
             <p>Ticker: <span th:text="${company.ticker}"></span><br />
-                Net Income: <span th:text="${company.getNetIncome()}"></span><br />
-                Earnings Per Share: <span th:text="${company.eps}"></span><br /><br />
-                Total Assets: <span th:text="${company.getTotalAssets()}"></span><br /><br />
-                Total Liabilities: <span th:text="${company.getTotalLiabilities()}"></span><br /><br />
-                Sales Revenue: <span th:text="${company.getSales()}"></span></p>
+                Net Income: $<span th:text="${company.getNetIncome()}"></span><br />
+                Earnings Per Share: $<span th:text="${company.eps}"></span><br /><br />
+                Total Assets: $<span th:text="${company.getTotalAssets()}"></span><br /><br />
+                Total Liabilities: $<span th:text="${company.getTotalLiabilities()}"></span><br /><br />
+                Sales Revenue: $<span th:text="${company.getSales()}"></span></p>
             <form th:action="@{/company/{ticker}(ticker = ${company.ticker})}" method="GET">
                 <button class="btn btn-dark">More Details</button>
             </form>
