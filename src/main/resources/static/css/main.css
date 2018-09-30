@@ -99,3 +99,14 @@ footer{
 }
 
 
+.navIcon {
+    color: white;
+    text-shadow: 1px 1px 1px;
+    font-size: 1.5em;
+}
+
+li {
+    display: flex;
+    align-items: center;
+}
+
