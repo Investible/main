@@ -1,159 +1,184 @@
-@import url('http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+/** {*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*font-family: SansSerif;*/
+/*}*/
+
 
 body{
-    margin: 0;
-    padding: 0;
-    background: #262626;
-    font-family: 'Roboto', sans-serif;
-}
-.team{
-    padding: 50px 0;
-    height: 100vh;
-    box-sizing: border-box;
-}
-.container{
-    width:80%;
-    margin: 50px auto;
-}
-.row{
-    position: relative;
-    width: 100%;
-    box-sizing: border-box;
-}
-.row h1{
-    color: #fff;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    font-weight: 700;
-    font-size: 48px;
-    text-transform: uppercase;
-}
-.row p {
-    margin: 20px 0 0;
-    color: #fff;
-    padding-left: 20px;
-    border-left: 5px solid #00415d;
-}
-.mgt50px{
-    margin-top: 50px;
-}
-.row .column {
-    margin: 0 10px;
-    position: relative;
-    width: calc(25% - 20px);
-    min-height: 250px;
-    background: #fff;
-    float: left;
-    box-sizing: border-box;
-    overflow: hidden;
-}
-.row .column:before{
-    content: '';
-    position: absolute;
-    bottom: -100%;
-    left:0;
+    background-image: url("stockmarket.jpg");
+    background-size: 100%;
+    /*min-height: 100%;*/
+    /*min-width: 1024px;*/
+
+    /* Set up proportionate scaling */
     width: 100%;
     height: 100%;
-    background: rgba(255,0,0,1);
-    /*z-index: 1;*/
-    transition: .5s;
-    /*mix-blend-mode: soft-light;*/
-}
-.row .column:hover:before{
-    bottom: -100%;
 
-}
-.row .column .imgBox{
-    position: relative;
+    /* Set up positioning */
+    /*position: fixed;*/
+    top: 2px;
+    left: 2px;
+    color: white;
+    text-shadow: 4px 4px 8px #000000;
+
+    font-style: oblique;
 }
 
-.row .column .imgBox img{
-    width: 100%;
-    transition: .5s;
+@media screen and (max-width: 500px) {
+    /* Specific to this particular image */
+    img {
+        left: 50%;
+        margin-left: -512px; /* 50% */
+        background-repeat: no-repeat;
+    }
 }
-.row .column:hover .imgBox img{
-    transform: scale(1.0);
+@media screen and (max-width: 500px) {
+    .card {
+        width: 100%;
+    }
 }
-.row .column .details{
-    position: absolute;
-    bottom: -100px;
-    left: 0;
-    padding: 10px;
-    box-sizing: border-box;
-    background: rgba(0,0,0,.9);
-    width: 100%;
-    transition: .5s;
-    z-index: 2;
+@media screen and (max-width: 650px) {
+    .column {
+        width: 100%;
+        display: block;
+    }
 }
-.row .column:hover .details{
-    bottom: 0;
 
+img{
+    margin: 0 30px;
+    width: 160px;
+    height: 160px;
+    overflow: hidden;
+    border-radius: 50%;
+    object-fit: cover;
+    filter:grayscale(100%);
 }
-.row .column .details h3{
-    margin: 0;
-    padding: 0;
-    color: #fff;
-    font-weight:500;
-    text-align: right;
+
+
+/*old way*/
+/*.card {*/
+    /*background-color: inherit;*/
+    /*text-align: center;*/
+    /*border: 1px solid #f1f1f1;*/
+    /*padding: inherit;*/
+    /*width: 250px;*/
+    /*box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+/*}*/
+
+
+.about-card {
+background-color: inherit;
+text-align: center;
+/*border: 1px solid #f1f1f1;*/
+width: 100%;
+box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.card row{
+    text-align: center;
+}
+
+
+img:hover {
+    filter: none;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.border {
+    display: block;
+    margin: auto;
+    width: 160px;
+    height: 3px;
+    background: #3498db;
+    margin-bottom: 40px;
+}
+
+h3 {
     text-transform: uppercase;
+    margin: 60px;
+    font-size: 40px;
 }
-.row .column .details h3 span{
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
-    color: #f00;
-    font-weight: 900;
-    text-transform: uppercase;
-    position: relative;
-    top: -6px;
 
+h1{
+    overflow: hidden;
 }
-.row .column .details ul{
-    margin: 0;
-    padding: 0;
-    display: flex;
-    float: right;
+
+.card:target{
+    height: auto;
 }
-.row .column .details ul li{
+
+p{
+    width: 400px;
+    margin: 40px;
+    font-size: 20px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.name{
+    display: block;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 22px;
+}
+
+.icon{
+    width: 35px;
+    height: 60px;
+    float: left;
+    filter: none;
+    margin-bottom: 5px;
+    padding-top: 10px;
+    padding-bottom: 12px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+ul {
     list-style: none;
+    text-align: center;
 }
-.row .column .details ul li a{
-    padding: 0 20px;
-    color:#fff;
-
-}
-.row .column .details ul li a .fa{
-    transition: 5s;
-}
-.row .column .details ul li a:hover .fa{
-    transform: rotateY(365deg);
-    color: #00415d;
+li {
+    display: inline;
+    text-align: center;
 }
 
-/*//------Media Querries--------//*/
-
-@media (max-width: 992px) {
-    .container{
-        width:90%;
-        margin: 20px auto;
-    }
-    .row .column {
-        width: calc(50% - 20px);
-        margin-bottom: 20px;
-
-    }
-
+.card-text1{
+    overflow: hidden;
 }
-@media (max-width: 600px) {
-    .container{
-        width:95%;
-        margin: 20px auto;
-    }
-    .row .column {
-        width: calc(100% - 20px);
-        margin-bottom: 20px;
 
-    }
+#1{
+    text-align: center;
+    overflow-scrolling: auto;
+}
 
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row {
+    text-align: justify;
+}
+.row > div {
+    /*width: 100px; !* Declare your value. Can be in relative units. *!*/
+    /*height: 10px;*/
+    /*display: inline-block;*/
+    vertical-align: top;
+    border: 1px black solid;
+     /*!*IE fix. *!*/
+    *display: inline;
+    zoom: 1;
+}
+.row:after {
+    content: "";
+    width: 100%;
+    display: inline-block;
 }
