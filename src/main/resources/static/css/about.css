@@ -81,7 +81,7 @@ h1{
 }
 .row .column .details{
     position: absolute;
-    bottom: -85px;
+    bottom: -100%;
     left: 0;
     padding: 10px;
     box-sizing: border-box;
