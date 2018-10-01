@@ -1,8 +1,9 @@
-@import url("http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900");
+@import url('http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+
 body{
     margin: 0;
     padding: 0;
-    background-image: url("1.jpg");
+    background: #262626;
     font-family: 'Roboto', sans-serif;
 }
 .team{
@@ -20,7 +21,7 @@ body{
     box-sizing: border-box;
 }
 .row h1{
-    color: #666666;
+    color: #fff;
     text-align: center;
     margin: 0;
     padding: 0;
@@ -30,11 +31,11 @@ body{
 }
 .row p {
     margin: 20px 0 0;
-    color: #16425b;
+    color: #fff;
     padding-left: 20px;
-    border-left: 5px solid #f00
+    border-left: 5px solid #00415d;
 }
-mgt50px{
+.mgt50px{
     margin-top: 50px;
 }
 .row .column {
@@ -42,10 +43,10 @@ mgt50px{
     position: relative;
     width: calc(25% - 20px);
     min-height: 250px;
-    /*background: #2f6690;*/
+    background: #fff;
     float: left;
     box-sizing: border-box;
-    over-flow: hidden;
+    overflow: hidden;
 }
 .row .column:before{
     content: '';
@@ -55,12 +56,12 @@ mgt50px{
     width: 100%;
     height: 100%;
     background: rgba(255,0,0,1);
-    z-index: 1;
-    transition: 5s;
-    mix-blend-mode: soft-light;
+    /*z-index: 1;*/
+    transition: .5s;
+    /*mix-blend-mode: soft-light;*/
 }
 .row .column:hover:before{
-    bottom: 0;
+    bottom: -100%;
 
 }
 .row .column .imgBox{
@@ -69,14 +70,14 @@ mgt50px{
 
 .row .column .imgBox img{
     width: 100%;
-    transition: 5s;
+    transition: .5s;
 }
 .row .column:hover .imgBox img{
-    transform: scale(1.5);
+    transform: scale(1.0);
 }
 .row .column .details{
     position: absolute;
-    bottom: -85px;
+    bottom: -100px;
     left: 0;
     padding: 10px;
     box-sizing: border-box;
@@ -97,6 +98,17 @@ mgt50px{
     text-align: right;
     text-transform: uppercase;
 }
+.row .column .details h3 span{
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    color: #f00;
+    font-weight: 900;
+    text-transform: uppercase;
+    position: relative;
+    top: -6px;
+
+}
 .row .column .details ul{
     margin: 0;
     padding: 0;
@@ -107,11 +119,16 @@ mgt50px{
     list-style: none;
 }
 .row .column .details ul li a{
-    padding: 0 10px;
+    padding: 0 20px;
+    color:#fff;
 
 }
-.row .column .details ul li a:hover .icon{
-    transform: rotate(360deg);
+.row .column .details ul li a .fa{
+    transition: 5s;
+}
+.row .column .details ul li a:hover .fa{
+    transform: rotateY(365deg);
+    color: #00415d;
 }
 
 /*//------Media Querries--------//*/
