@@ -53,6 +53,13 @@ async function buildArticlesHTML() {
       </article>
       </div>
     `
+
+        // if(count === 1){
+        //     articlesHTML += ``
+        // }
+
+
+
     }
     NEWS_FEED_CONTAINER.insertAdjacentHTML('afterbegin', articlesHTML)
 }
