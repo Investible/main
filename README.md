@@ -5,9 +5,6 @@
 - [X]	Users can log into their account
 
 - [X]	Logged in users can comment on company profiles
-
-- [ ]	Logged in users can edit their own comments
-
 - [X]	Company information will be pulled from the last 10k API and added to our database
 
 - [X]	Users will be able to see information on several companies in a company index page
@@ -31,14 +28,16 @@ This feature list is expected to require these database tables:
 
 This feature list is expected to require these site views:
 
-- [ ] Home Page / User Comment Index
+- [X] Home Page / User Comment Index
 
-- [ ] Register User Page
+- [X] Register User Page
 
-- [ ] Login Page
+- [X] Login Page
 
-- [ ] Profile / Edit Profile Page
+- [X] Profile / Edit Profile Page
 
-- [ ] List of Companies Page
+- [X] List of Companies Page
 
-- [ ] Individual Company Detail Page
+- [X] Individual Company Detail Page
+
+- [X] Glossary Page

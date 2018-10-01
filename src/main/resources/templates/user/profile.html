@@ -8,18 +8,64 @@
 <body>
 <nav th:replace="fragments/partials :: navbar"></nav>
 
-<p th:text="${profileOwner.username}"></p>
-<p th:text="${profileOwner.firstName}"></p>
-<p th:text="${profileOwner.lastName}"></p>
-<p th:text="${profileOwner.email}"></p>
-<p th:text="${profileOwner.id}"></p>
+<div clas="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-8 pt-4 div-border mt-5">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#info">Infomation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#comments">Comments</a>
+                </li>
+            </ul>
 
-<form th:if="${isProfileOwner}" th:action="@{/profile/{id}/edit(id =${profileOwner.id})}">
-    <button type="submit">Edit Profile</button>
-</form>
+            <div class="tab-content">
+                <div class="tab-pane container active" id="info">
+                    <span>
+                        Username: <p th:text="${profileOwner.username}"></p>
+                    </span>
+                    <span>
+                        First Name: <p th:text="${profileOwner.firstName}"></p>
+                    </span>
+                    <span>
+                        Last Name: <p th:text="${profileOwner.lastName}"></p>
+                    </span>
+                    <span>
+                        Email:  <p th:text="${profileOwner.email}"></p>
+                    </span>
+
+                    <form th:if="${isProfileOwner}" th:action="@{/profile/{id}/edit(id =${profileOwner.id})}">
+                        <button class="btn btn-primary" type="submit">Edit Profile</button>
+                    </form>
+                </div>
+                <div class="tab-pane container fade" id="comments">
+                    <div class="container-fluid">
+                        <div class="row justify-content-center">
+                            <!--<div class="col-sm-12 col-md-6 px-3" >-->
+                            <div th:each="comment : ${userComments}" class="col-sm-12 col-md-5 mx-2 my-3" style="border: black solid 1px">
+
+                                    <div  th:text="${comment.getBody()}"></div>
+                                    <a th:href="@{/company/{ticker}(ticker = ${comment.company.getTicker()})}" th:text="${comment.company.getName()}">Card link</a>
+                                </div>
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
 
 
-<footer th:replace="fragments/partials :: footer"></footer>
+                        <!--<p th:text="${comment.company.getName()}"></p>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
 <div th:replace="fragments/partials :: javascript"></div>
 </body>
 </html>
