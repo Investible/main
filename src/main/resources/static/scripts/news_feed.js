@@ -54,10 +54,6 @@ async function buildArticlesHTML() {
       </div>
     `
 
-        // if(count === 1){
-        //     articlesHTML += ``
-        // }
-
 
 
     }

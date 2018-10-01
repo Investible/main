@@ -24,13 +24,17 @@
         #news-feed{
             height: 600px;
             width: 95%;
-            overflow: scroll;
+            overflow: auto;
         }
         a:link, a:visited{
             color: black;
         }
         body{
             background-color: darkgrey;
+        }
+
+        body::-webkit-scrollbar {
+            width: 1em;
         }
 
         .card{
@@ -43,6 +47,7 @@
                 top: 80px;
             }
         }
+
     </style>
 </head>
 <body>

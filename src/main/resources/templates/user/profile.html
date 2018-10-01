@@ -4,13 +4,32 @@
     <div th:replace="fragments/partials :: bootstrapHeaderBasic"></div>
     <title>Profile</title>
     <div th:replace="fragments/partials :: bootstrapCSS"></div>
+
+
+    <style>
+
+        body{
+            background: url("/img/profile.jpg") no-repeat;
+            background-size: cover;
+        }
+
+        html{
+            height: 100%;
+        }
+
+        .main{
+            background-color: rgba(255, 255, 255, .9);
+            padding: 2em;
+            margin-top: 5em;
+        }
+    </style>
 </head>
 <body>
 <nav th:replace="fragments/partials :: navbar"></nav>
 
-<div clas="container-fluid">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-8 pt-4 div-border mt-5">
+        <div class="col-8 pt-4 div-border main">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#info">Infomation</a>
