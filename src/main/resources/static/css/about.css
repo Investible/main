@@ -120,25 +120,25 @@ h1{
     display: flex;
     float: right;
 }
-.row .column .details ul li{
+.row .column .details ul {
     list-style: none;
 }
-.row .column .details ul li a{
+.row .column .details ul  a{
     padding: 0 20px;
     color:#fff;
 
 }
-.row .column .details ul li a .fab{
+.row .column .details ul  a .fab{
     transition: .5s;
 }
-.row .column .details ul li a .far{
+.row .column .details ul  a .far{
     transition: .5s;
 }
-.row .column .details ul li a:hover .fab{
+.row .column .details ul  a:hover .fab{
     transform: rotateY(365deg);
     color: #f00;
 }
-.row .column .details ul li a:hover .far {
+.row .column .details ul  a:hover .far {
     transform: rotateY(365deg);
     color: #f00;
 }
@@ -166,5 +166,9 @@ h1{
         margin-bottom: 20px;
 
     }
+}
 
+li {
+    display: flex;
+    align-items: center;
 }
