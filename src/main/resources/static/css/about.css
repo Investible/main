@@ -1,3 +1,4 @@
+
 @import url('http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
 
 body{
@@ -20,6 +21,9 @@ body{
     width: 100%;
     box-sizing: border-box;
 }
+h1{
+    text-align: center;
+}
 .row h1{
     color: #fff;
     text-align: center;
@@ -33,7 +37,7 @@ body{
     margin: 20px 0 0;
     color: #fff;
     padding-left: 20px;
-    border-left: 5px solid #00415d;
+    border-left: 5px solid  #f00;
 }
 .mgt50px{
     margin-top: 50px;
@@ -56,16 +60,17 @@ body{
     width: 100%;
     height: 100%;
     background: rgba(255,0,0,1);
-    /*z-index: 1;*/
+    z-index: 1;
     transition: .5s;
-    /*mix-blend-mode: soft-light;*/
+    mix-blend-mode: soft-light;
 }
 .row .column:hover:before{
-    bottom: -100%;
+    bottom: 0;
 
 }
 .row .column .imgBox{
     position: relative;
+
 }
 
 .row .column .imgBox img{
@@ -73,11 +78,11 @@ body{
     transition: .5s;
 }
 .row .column:hover .imgBox img{
-    transform: scale(1.0);
+    transform: scale(1.5);
 }
 .row .column .details{
     position: absolute;
-    bottom: -100px;
+    bottom: -100%;
     left: 0;
     padding: 10px;
     box-sizing: border-box;
@@ -123,14 +128,20 @@ body{
     color:#fff;
 
 }
-.row .column .details ul li a .fa{
-    transition: 5s;
+.row .column .details ul li a .fab{
+    transition: .5s;
 }
-.row .column .details ul li a:hover .fa{
+.row .column .details ul li a .far{
+    transition: .5s;
+}
+.row .column .details ul li a:hover .fab{
     transform: rotateY(365deg);
-    color: #00415d;
+    color: #f00;
 }
-
+.row .column .details ul li a:hover .far {
+    transform: rotateY(365deg);
+    color: #f00;
+}
 /*//------Media Querries--------//*/
 
 @media (max-width: 992px) {

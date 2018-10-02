@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8" />
+    <div th:replace="fragments/partials :: bootstrapHeaderBasic"></div>
     <title>Company Index</title>
+
+    <div th:replace="fragments/partials :: bootstrapHeaderBasic"></div>
+
+    <div th:replace="fragments/partials :: bootstrapCSS"></div>
+
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
     <link rel="stylesheet" href="/css/main.css" type="text/css" />
@@ -31,22 +36,32 @@
 
 <div class="container">
 
-    <div class="row company-wrapper" th:each="company : ${companies}">
-        <div class="col-md-7">
-            <a href="#">
-                <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt=""/>
-            </a>
+    <div class="row company-wrapper my-5" th:each="company : ${companies}">
+        <div class="col-md-7" th:switch="${company.getTicker()}">
+            <img th:case="'aapl'" class="img-fluid rounded mb-3 mb-md-0" src="/img/company/appl.jpg" alt=""/>
+            <img th:case="'feye'" class="img-fluid rounded mb-3 mb-md-0" src="/img/company/feye.jpg" alt=""/>
+            <img th:case="'gpro'" class="img-fluid rounded mb-3 mb-md-0" src="/img/company/gpro.jpg" alt=""/>
+            <img th:case="'lc'" class="img-fluid rounded mb-3 mb-md-0" src="/img/company/lc.png" alt=""/>
+            <img th:case="'newr'" class="img-fluid rounded mb-3 mb-md-0" src="/img/company/newr.png" alt=""/>
+            <img th:case="'qlys'" class="img-fluid rounded mb-3 mb-md-0" src="/img/company/qlys.jpg" alt=""/>
+            <img th:case="'quot'" class="img-fluid rounded mb-3 mb-md-0" src="/img/company/quot.jpg" alt=""/>
+            <img th:case="'roku'" class="img-fluid rounded mb-3 mb-md-0" src="/img/company/roku.png" alt=""/>
+            <img th:case="'rpd'" class="img-fluid rounded mb-3 mb-md-0" src="/img/company/rpd.png" alt=""/>
+            <img th:case="'run'" class="img-fluid rounded mb-3 mb-md-0" src="/img/company/run.png" alt=""/>
+            <img th:case="'sq'" class="img-fluid rounded mb-3 mb-md-0" src="/img/company/sq.jpg" alt=""/>
+            <img th:case="'twlo'" class="img-fluid rounded mb-3 mb-md-0" src="/img/company/twlo.png" alt=""/>
+            <img th:case="*" class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt=""/>
+
         </div>
         <div class="col-md-5">
-            <h2 th:text="${company.name}" class="card-title"></h2>
+            <h2 th:text="${company.name}"></h2>
             <h4>Company Data (Last Year):</h4>
-
-            <p>Ticker: <span th:text="${company.ticker}"></span><br />
-                Net Income: $<span th:text="${company.getNetIncome()}"></span><br />
-                Earnings Per Share: $<span th:text="${company.eps}"></span><br /><br />
-                Total Assets: $<span th:text="${company.getTotalAssets()}"></span><br /><br />
-                Total Liabilities: $<span th:text="${company.getTotalLiabilities()}"></span><br /><br />
-                Sales Revenue: $<span th:text="${company.getSales()}"></span></p>
+            <p>
+                Net Income: $ <span th:text="${company.getNetIncome()}"></span><br />
+                Earnings Per Share: $ <span th:text="${company.eps}"></span><br /><br />
+            </p>
+            <br />
+            <br />
             <form th:action="@{/company/{ticker}(ticker = ${company.ticker})}" method="GET">
                 <button class="btn btn-dark">More Details</button>
             </form>
@@ -63,11 +78,11 @@
                 <!--<h4>Company Data (Last Year):</h4>-->
 
                 <!--<p>Ticker: <span th:text="${company.ticker}"></span><br />-->
-                    <!--Net Income: $<span th:text="${company.getNetIncome()}"></span><br />-->
+                    <!--Net Income: $ <span th:text="${company.getNetIncome()}"></span><br />-->
                     <!--&lt;!&ndash;Earnings Per Share: $<span th:text="${company.eps}"></span><br /><br />&ndash;&gt;-->
                     <!--&lt;!&ndash;Total Assets: $<span th:text="${company.getTotalAssets()}"></span><br /><br />&ndash;&gt;-->
                     <!--&lt;!&ndash;Total Liabilities: $<span th:text="${company.getTotalLiabilities()}"></span><br /><br />&ndash;&gt;-->
-                    <!--Sales Revenue: $<span th:text="${company.getSales()}"></span></p>-->
+                    <!--Sales Revenue: $ <span th:text="${company.getSales()}"></span></p>-->
 
                 <!--<form th:action="@{/company/{ticker}(ticker = ${company.ticker})}" method="GET">-->
                     <!--<button class="btn btn-dark">More Details</button>-->
