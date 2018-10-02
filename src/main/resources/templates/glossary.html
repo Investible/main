@@ -4,11 +4,29 @@
     <meta charset="UTF-8" />
     <title>Glossary</title>
 
+    <div th:replace="fragments/partials :: bootstrapHeaderBasic"></div>
+
+    <div th:replace="fragments/partials :: bootstrapCSS"></div>
+
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
     <style>
 
         body{
             background-color: lightblue;
+        }
+        .grey-card{
+
+            background-color: darkgrey;
+        }
+
+        .card{
+            border-bottom: grey solid 5px;
+        }
+
+        .card-text{
+            width: 80%;
+            margin-left: 10%;
         }
 
     </style>
@@ -21,11 +39,45 @@
 
     <h2 class="my-5">Glossary</h2>
 
-    <p class="my-5 text-center">Here we've assembled a list of terms that may be helpful for using our site.</p>
+    <h5 class="my-5 text-center">Here we've assembled a list of terms that may be helpful for using our site.</h5>
 
-    <section class="card text-center">
+    <section class="card text-center py-5">
 
-        <h4 class="card-title">This will be the first term, once we decide on a list of terms.</h4>
+        <h4 class="card-title">Ticker Symbol</h4>
+
+        <p class="card-text">A ticker symbol is an arrangement of characters that represent a publicly traded company. Every ticker is unique and is used by investors to place trade orders.</p>
+
+    </section>
+
+    <section class="card text-center py-5 grey-card">
+
+        <h4 class="card-title">Sales Revenue</h4>
+
+        <p class="card-text">Sales revenue represents the total income from the sale of goods and services. Sales revenue statistics have the associated costs subtracted ahead of time.</p>
+
+    </section>
+
+    <section class="card text-center py-5">
+
+        <h4 class="card-title">Earnings Per Share</h4>
+
+        <p class="card-text">A company's earnings per share is the portion of the company's profit that's allocated to each outstanding share. Earnings per share help indicate a company's profitability.</p>
+
+    </section>
+
+    <section class="card text-center py-5 grey-card">
+
+        <h4 class="card-title">Assets</h4>
+
+        <p class="card-text">The word asset refers to any resource with economic value owned by an individual, company, or country.</p>
+
+    </section>
+
+    <section class="card text-center py-5 mb-5">
+
+        <h4 class="card-title">Liabilities</h4>
+
+        <p class="card-text">Liabilities are a company's financial debts and obligations. Liabilities are settled over time through the transfer of money, goods, or services.</p>
 
     </section>
 

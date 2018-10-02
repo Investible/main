@@ -6,14 +6,14 @@ function requestURL() {
         COUNTRY_PARAM = "country=us&",
         ARTICLE_CATEGORY = "category=business&",
         // NEWSFEED_APIKEY = "apiKey=99df6baec7fb440291394e15ceb17586"
-        NEWSFEED_APIKEY = "apiKey=be56e2bd456c4178ba8b9bc080a0d860"
+        NEWSFEED_APIKEY = "apiKey=be56e2bd456c4178ba8b9bc080a0d860";
 
     return [BASE_URL, COUNTRY_PARAM, ARTICLE_CATEGORY, NEWSFEED_APIKEY].join('')
 }
 
 async function fetchArticles() {
     try {
-        var response = await fetch(requestURL())
+        var response = await fetch(requestURL());
         var data = await response.json();
         return data.articles;
     } catch (e) {
@@ -22,8 +22,7 @@ async function fetchArticles() {
 }
 
 async function buildArticlesHTML() {
-    console.log('buildArticlesHTML');
-    var articlesArray = await fetchArticles()
+    var articlesArray = await fetchArticles();
     var articlesHTML = "";
     var count = 0;
     for await(let article of articlesArray) {
@@ -39,31 +38,25 @@ async function buildArticlesHTML() {
             continue;
         }
         count ++;
-        if(count === 10){
+        if(count === 11){
             break;
         }
         articlesHTML += `
-
-
       <div class='article-container'>
-          <div class="wrapper">
-      <article>
-          <h2 class='article-title'>${article.title}</h2>
-          <p class='article-description'>${article.description}</p>
-          <p class='article-timestamp'>${article.publishedAt}</p>
-          <h3 class='article-author'>By ${article.author}</h3>
-          <div class="over-all">
+      <article class="card p-3">
+          <a href="${article.url}" target="_blank"><h3 class='article-title'>${article.title}</h3><br />
+          <p class='article-description'>${article.description}</p><br />
           <div class="newsfeed-img">
           <img src='${article.urlToImage}' alt='${article.title}'>
           </div>
-          </div>
-          <p class='article-content'>${article.content}</p>
+          </a>
       </article>
-        </div>
       </div>
     `
+
+
+
     }
-    console.log(articlesHTML)
     NEWS_FEED_CONTAINER.insertAdjacentHTML('afterbegin', articlesHTML)
 }
 

@@ -1,6 +1,5 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #16425b;
     color: #16425b;
 }
 
@@ -10,7 +9,6 @@ body{
     padding: 0;
     margin: 0;
     background-image: url("placeholder2.jpg");
-    background-image: image("placeholder2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -54,42 +52,24 @@ footer{
 
 .article-container{
     width: 100%;
-    padding: 5px 100px;
+    padding: 0;
+    margin: 0;
     background-color: #cccccc;
-    overflow: hidden;
     align-content: center;
 }
 
 .article-container article{
-    width: 50%;
-    padding: 80px 0px;
-    background-color: #00415d;
+    width: 100%;
     float: inside;
-    margin: 5px 1%;
     text-align: center;
     align-content: center;
 }
 
-.over-all{
-    width: 100%;
-    background-repeat: no-repeat;
-    background-size: 50px;
-}
-
-.newsfeed-img{
-    width:75%;
-    margin: 100px;
-    height: 400px;
-    overflow: hidden;
-    align-content: normal;
-}
 .article-container article h2{
     font-weight: 400;
     font-family: Lato;
-    font-size: 30px;
+    font-size: 26px;
     text-align: center;
-    padding-bottom: 10px;
-    padding-top: 10px;
     text-transform: uppercase;
     color: #000;
 }
@@ -97,19 +77,36 @@ footer{
 .article-container article p{
     font-weight: 400;
     font-family: Lato;
-    font-size: 16px;
+    font-size: 20px;
     text-align: center;
     padding-bottom: 10px;
-    color: #888888;
 }
 
 .tradingview-widget-container{
     position: absolute;
     top: 150px;
-    /*bottom: 100px;*/
     right: 75px;
     font-size: 18px;
     margin-left: 50px;
+
     /*position: sticky;*/
 
 }
+
+.div-border {
+    border-style: solid;
+    border-width: 2px;
+}
+
+
+.navIcon {
+    color: white;
+    text-shadow: 1px 1px 1px;
+    font-size: 1.5em;
+}
+
+li {
+    display: flex;
+    align-items: center;
+}
+
